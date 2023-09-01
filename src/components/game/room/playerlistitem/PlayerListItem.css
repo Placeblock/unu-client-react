@@ -1,0 +1,20 @@
+.player-list-item {
+    border-radius: 10px;
+    background-color: var(--primary-color);
+    padding: 10px;
+    color: white;
+    box-shadow: 0px 0px 10px black;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.player-list-item-metadata {
+    display: flex;
+    gap: 5px;
+    font-size: 17px;
+}
+
+.player-list-item-metadata .fa-screwdriver-wrench {
+    color: rgb(255, 166, 0);
+}

@@ -1,0 +1,21 @@
+.name-input form {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+    max-width: 95%;
+}
+
+.name-input label{
+    display: block;
+    color: white;
+}
+
+.name-input input {
+    background-color: white;
+    height: 50px;
+    padding-left: 20px;
+    user-select: auto;
+    font-size: 20px;
+}

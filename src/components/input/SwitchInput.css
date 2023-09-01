@@ -1,0 +1,23 @@
+.switch-input {
+    font-size: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.switch-input:not(.switch-input-disabled):hover {
+    cursor: pointer;
+}
+
+.switch-input-on {
+    color: var(--positive-color)
+}
+
+.switch-input-off {
+    color: gray;
+}
+
+.switch-input-disabled {
+    opacity: 0.5;
+}

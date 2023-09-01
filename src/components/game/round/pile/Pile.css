@@ -1,0 +1,19 @@
+.pile {
+    width: 130px;
+    height: 200px;
+}
+
+.pile-card {
+    position: absolute;
+    background-color: transparent;
+    border: none;
+}
+
+.pile-card-clickable {
+    transition: scale 0.2s ease-in-out;
+}
+
+.pile-card-clickable:hover, .pile-card-clickable:focus {
+    scale: 1.05;
+    cursor: pointer;
+}

@@ -1,0 +1,62 @@
+.room-settings {
+    position: fixed;
+    padding: 20px;
+    background-color: var(--dark-color);
+    border-radius: 20px;
+    z-index: 2;
+    box-shadow: 0px 0px 10px var(--dark-color);
+}
+
+.room-settings-info h1 {
+    color: var(--primary-color);
+}
+
+.room-settings-info {
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.room-settings-info p {
+    color: gray;
+    font-size: 13px;
+}
+
+.room-settings-contents {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.room-settings-close-button {
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    background-color: transparent;
+    color: var(--negative-color);
+    border: none;
+    font-size: 25px;
+    width: 25px;
+    height: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@media only screen and (min-width: 769px) {
+    .room-settings-close-button {
+        display: none;
+    }
+    .room-settings {
+        left: 20px;
+        top: 20px;
+        width: 300px;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .room-settings {
+        left: 50px;
+        right: 50px;
+        bottom: 120px;
+    }
+}

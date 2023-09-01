@@ -1,0 +1,54 @@
+.opponent-inventory {
+    text-align: center;
+    height: 200px;
+}
+
+.opponent-inventory-cards-container {
+    position: relative;
+    transition: scale 0.2s ease-in-out;
+    scale: 0.35;
+    top: 20px;
+}
+
+.opponent-inventory-cards-container.active-opponent-inventory {
+    scale: 0.45;
+}
+
+.opponent-inventory-card-container {
+    position: absolute;
+    transform-origin: top center;
+    left: 50%;
+    transition: transform 0.2s ease-in-out;
+}
+
+.opponent-inventory-player-name {
+    color: var(--primary-color);
+}
+
+.opponent-inventory-number-card {
+    border: 2px solid white;
+    border-radius: 5px;
+    transform-origin: top center;
+    color: var(--primary-color);
+    height: 50px;
+    min-width: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.opponent-inventory-number-card.active-opponent-inventory {
+    scale: 1.4;
+}
+
+.opponent-inventory-small {
+    display: none;
+}
+
+@media only screen and (max-width: 768px) {
+    .opponent-inventory-large {
+        display: none;
+    }
+    .opponent-inventory-small {
+        display: block;
+    }
+}

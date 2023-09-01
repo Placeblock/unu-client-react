@@ -1,0 +1,25 @@
+.loading-spinner {
+    font-size: 30px;
+    display: flex;
+    color: var(--primary-color);
+}
+
+@keyframes spinner-right {
+    from {transform: rotate(390deg);}
+    to {transform: rotate(30deg);}
+}
+
+@keyframes spinner-left {
+    from {transform: rotate(0deg);}
+    to {transform: rotate(360deg);}
+}
+
+.loading-spinner svg:nth-child(odd) {
+    animation: spinner-left 2s infinite linear;
+    transform-origin: center center;
+}
+
+.loading-spinner svg:nth-child(even) {
+    animation: spinner-right 2s infinite linear;
+    transform-origin: center center;
+}

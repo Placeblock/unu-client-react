@@ -1,0 +1,12 @@
+:root {
+  --background-color: rgb(27, 27, 27);
+  --dark-color: #0f0f0f;
+  --primary-color: #4538ff;
+  --negative-color: #ff3838;
+  --positive-color: #14c343;
+}
+
+#root {
+  width: 100%;
+  height: 100%;
+}

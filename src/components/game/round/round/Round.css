@@ -1,0 +1,26 @@
+.round {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 60px;
+}
+
+.inventory-container {
+    position: fixed;
+    height: 200px;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.opponent-inventory-list-container {
+    position: fixed;
+    width: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 10px;
+    display: flex;
+    justify-content: center;
+}
