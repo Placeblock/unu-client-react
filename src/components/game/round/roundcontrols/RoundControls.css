@@ -1,0 +1,24 @@
+.round-controls {
+    display: flex;
+    border-radius: 10px;
+    background-color: var(--dark-color);
+    padding: 5px;
+    border-radius: 100px;
+    gap: 10px;
+}
+
+.round-controls button {
+    border-radius: 100px;
+    width: 50px;
+    height: 50px;
+    font-size: 20px;
+    background-color: var(--background-color);
+}
+
+.ack-last-card-button, .sort-button {
+    color: var(--primary-color);
+}
+
+.skip-button {
+    color: var(--positive-color);
+}

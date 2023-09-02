@@ -4,7 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useCallback, useContext, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import useWebSocket from "../../websocket/WebSocketHook";
-import { addPlayer, removePlayer, setOwner, setSettings, setState } from "../../../store/roomSlice";
+import { addPlayer, removePlayer, resetRoom, setOwner, setSettings, setState } from "../../../store/roomSlice";
 import { setPlayerName } from "../../../store/roomSlice";
 import OpenChatButton from "./openchatbutton/OpenChatButton";
 import OpenControlsButton from "./opencontrolsbutton/OpenControlsButton";
@@ -15,7 +15,7 @@ import RoomSettings from "../settings/RoomSettings";
 import Round from "../round/round/Round";
 import { WebsocketContext } from "../../websocket/WebSocketContext";
 import { setCardDeck } from "../../../store/cardDeckSlice";
-import { setInventory, setRoundData } from "../../../store/roundSlice";
+import { resetRound, setInventory, setRoundData } from "../../../store/roundSlice";
 
 export default function Room() {
     const {id} = useParams();
@@ -86,24 +86,28 @@ export default function Room() {
     const toggleShowControls = useCallback(() => {
         setShowControls(sc => !sc);
     }, [])
-
+    const handleLeave = useCallback(() => {
+        sendMessage("leave_room", {});
+        dispatch(resetRoom())
+        dispatch(resetRound())
+    });
 
     return (
         <div className="room">
+            <div className="open-controls-button-container">
+                <OpenControlsButton onToggle={toggleShowControls} />
+            </div>
+            <div className={`room-controls ${showControls?"room-controls-visible":""}`}>
+                <div className="open-chat-button-container">
+                    <OpenChatButton onToggle={toggleShowChat} />
+                </div>
+                <LeaveRoomButton onLeave={handleLeave}/>
+            </div>
+            <ChatOverlay showChat={showChat} />
             {status=="LOBBY"?
                 <>
-                    <div className="open-controls-button-container">
-                        <OpenControlsButton onToggle={toggleShowControls} />
-                    </div>
-                    <div className={`room-controls ${showControls?"room-controls-visible":""}`}>
-                        <div className="open-chat-button-container">
-                            <OpenChatButton onToggle={toggleShowChat} />
-                        </div>
-                        <LeaveRoomButton onLeave={() => {}}/>
-                    </div>
-                    <ChatOverlay showChat={showChat} />
-                    {showSettings&&<RoomSettings onClose={toggleShowSettings} />}
                     <RoomOverview onToggleSettings={toggleShowSettings} onStart={startRound} />
+                    {showSettings&&<RoomSettings onClose={toggleShowSettings} />}
                 </>:
                 <Round />
             }

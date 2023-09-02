@@ -4,6 +4,11 @@
   --primary-color: #4538ff;
   --negative-color: #ff3838;
   --positive-color: #14c343;
+
+  --card-red: #b02525;
+  --card-blue: #2323db;
+  --card-green: #32ba4d;
+  --card-yellow: #fcb103;
 }
 
 #root {

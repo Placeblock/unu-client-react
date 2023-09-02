@@ -15,7 +15,7 @@
 }
 
 .inventory-card:focus .card, .inventory-card:hover .card {
-    transform: translateY(-20px) scale(1.05);
+    transform: translateY(-50px) scale(1.05);
     cursor: pointer;
 }
 

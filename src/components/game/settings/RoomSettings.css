@@ -1,6 +1,8 @@
 .room-settings {
     position: fixed;
     z-index: 2;
+    display: flex;
+    flex-direction: column;
 }
 
 .room-settings-info h1 {
@@ -18,6 +20,12 @@
 }
 
 .room-settings-contents {
+    overflow-y: auto;
+    min-height: 0px;
+    flex-grow: 1;
+}
+
+.room-settings-item-container {
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -51,9 +59,10 @@
 
 @media only screen and (max-width: 768px) {
     .room-settings {
-        left: 50px;
-        right: 50px;
+        left: 5%;
+        width: 90%;
         bottom: 120px;
+        max-height: 80%;
     }
 }
 

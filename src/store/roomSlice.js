@@ -7,12 +7,14 @@ const initialState = {
     "players": [],
     "settings": {
       start_card_amount: 7,
+      no_last_card_ack_punishment: 2,
       plus4_on_plus4: true,
       plus2_on_plus4: false,
       plus4_on_plus2: true,
       wish_on_plus4: true,
       plus4_on_wish: true,
       wish_on_wish: true,
+      skip_on_inverse2_players: true
     },
     "chat": {
       "messages": []

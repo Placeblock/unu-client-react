@@ -23,9 +23,9 @@ export default function Card({back=false, card={}}) {
             break;
     }
     return (
-        <div className="card">
+        <div className="card" style={{"borderColor":getHex(card.force_color, "#ffffff")}}>
             {!back && 
-            <div className="front" style={{"backgroundColor":getHex(card.color)}}>
+            <div className="front" style={{"backgroundColor":getHex(card.color, "#000000")}}>
                 <p className="top">{text}</p>
                 <p>{text}</p>
                 <p className="bottom">{text}</p>
@@ -38,17 +38,7 @@ export default function Card({back=false, card={}}) {
     );
 }
 
-function getHex(color) {
-    switch (color) {
-        case "RED":
-            return "#b02525"
-        case "BLUE":
-            return "#2323db"
-        case "GREEN":
-            return "#32ba4d"
-        case "YELLOW":
-            return "#fcb103"
-        default:
-            return "#000000"
-    }
+export function getHex(color, fallback) {
+    if (color == undefined) return fallback;
+    return "var(--card-" + color.toLowerCase() + ")";
 }

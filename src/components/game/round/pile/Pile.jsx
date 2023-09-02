@@ -1,12 +1,16 @@
 import "./Pile.css";
 import Card from "../../../card/Card";
 import { useState } from "react";
+import { useSelector } from "react-redux";
 
 
 export default function Pile({onDraw}) {
     const [transformations, setTransformations] = useState(() => getPileCards())
+    const currentPlayer = useSelector(state => state.round.value.currentPlayer);
+    const user = useSelector(state => state.user.value.uuid);
 
     function handleDraw() {
+        if (currentPlayer!=user) return;
         const removed = transformations.slice(0, -1);
         const added = [getRandom(), ...removed]
         onDraw();

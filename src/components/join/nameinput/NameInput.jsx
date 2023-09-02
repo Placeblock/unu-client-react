@@ -6,6 +6,7 @@ export default function NameInput({onSubmit}) {
 
     function handleClick(e) {
         e.preventDefault();
+        if (name === "") return;
         onSubmit(name);
     }
 

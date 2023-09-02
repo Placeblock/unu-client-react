@@ -36,7 +36,7 @@ export default function Inventory() {
 }
 
 export function calcTranslation(amount, i) {
-    const totalwidth = window.innerWidth/2;
+    const totalwidth = window.innerWidth/3;
     const betweencardsx = Math.min(totalwidth/amount, 30);
     const absolutecardsx = i*betweencardsx;
     return absolutecardsx-betweencardsx*amount/2;

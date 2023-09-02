@@ -5,6 +5,7 @@ const initialState = {
         currentPlayer: null,
         currentCard: null,
         drawStack: 0,
+        showColorPicker: false,
         playerCards: {
 
         },
@@ -40,6 +41,14 @@ export const roundSlice = createSlice({
     setInventory: (state, action) => {
         state.value.inventory = action.payload;
     },
+    sortInventory: (state) => {
+        state.value.inventory.sort((a, b) => {
+            const aWeight = getWeight(a);
+            const bWeight = getWeight(b);
+            if(aWeight == bWeight) return 0;
+            return aWeight > bWeight ? 1 : -1
+        })
+    },
     addCard: (state, action) => {
         state.value.inventory.push(action.payload);
     },
@@ -53,13 +62,17 @@ export const roundSlice = createSlice({
     setPlayerCards: (state, action) => {
         state.value.playerCards[action.payload.uuid] = action.payload.amount;
     },
+    setShowColorPicker: (state, action) => {
+        state.value.showColorPicker = action.payload;
+    },
     resetRound: () => initialState
   }
 })
 
 export const { setCurrentPlayer, setDrawStack, setPlayers,
     removePlayer, setInventory, addCard, setPlayersCards,
-    setPlayerCards, setCurrentCard, removeCard, resetRound } = roundSlice.actions
+    setPlayerCards, setCurrentCard, removeCard, resetRound,
+    sortInventory, setShowColorPicker } = roundSlice.actions
 
 export function setRoundData(dispatch, roundData) {
     dispatch(setCurrentPlayer(roundData.current_player));
@@ -71,3 +84,29 @@ export function setRoundData(dispatch, roundData) {
 }
 
 export default roundSlice.reducer
+
+//SORTING
+
+function getWeight(card) {
+    let weight = 0;
+    if ("color" in card) {
+        weight += colors[card.color];
+        if ("number" in card) {
+            weight += card["number"];
+        } else {
+            weight += 10;
+        }
+    } else if (card["type"] == "wish") {
+        weight += 50;
+    } else if (card["type"] == "draw_4") {
+        weight += 51;
+    }
+    return weight;
+}
+
+const colors = {
+    "RED": 0,
+    "BLUE": 11,
+    "GREEN": 22,
+    "YELLOW": 33,
+}

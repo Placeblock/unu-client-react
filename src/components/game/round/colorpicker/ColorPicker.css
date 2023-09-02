@@ -1,0 +1,54 @@
+.color-picker {
+    display: grid;
+    flex-wrap: wrap;
+    width: 400px;
+    height: 400px;
+    gap: 10px;
+    grid-template-columns: 195px 195px;
+}
+
+.color-picker button {
+    border: none;
+    transition: 0.2s ease-in-out;
+    box-shadow: 0px 0px 20px black;
+}
+
+.color-picker button:hover {
+    transform: scale(1.1);
+}
+
+.color-picker button:nth-child(1) {
+    border-top-left-radius: 10px;
+    transform-origin: bottom right;
+}
+
+.color-picker button:nth-child(2) {
+    border-top-right-radius: 10px;
+    transform-origin: bottom left;
+}
+
+.color-picker button:nth-child(3) {
+    border-bottom-left-radius: 10px;
+    transform-origin: top right;
+}
+
+.color-picker button:nth-child(4) {
+    border-bottom-right-radius: 10px;
+    transform-origin: top left;
+}
+
+.color-picker-red {
+    background-color: var(--card-red);
+}
+
+.color-picker-blue {
+    background-color: var(--card-blue);
+}
+
+.color-picker-green {
+    background-color: var(--card-green);
+}
+
+.color-picker-yellow {
+    background-color: var(--card-yellow);
+}
