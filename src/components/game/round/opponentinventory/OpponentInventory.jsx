@@ -1,8 +1,12 @@
 import Card from "../../../card/Card"
 import "./OpponentInventory.css"
 import { calcRotation } from "../inventory/Inventory";
+import useWebSocket from "../../../websocket/WebSocketHook";
+import { useState } from "react";
 
-export default function OpponentInventory({playerName, amount, active}) {
+export default function OpponentInventory({playerUUID, playerName, amount, active}) {
+    const [showAckLastCard, setShowAckLastCard] = useState(false);
+
     function calcTranslation(i) {
         const betweencardsx = 5;
         return i*betweencardsx-betweencardsx*amount/2;
@@ -10,12 +14,20 @@ export default function OpponentInventory({playerName, amount, active}) {
     function getTransform(i) {
         return "translateX(-50%) translateX("+calcTranslation(i)+"px) rotate(" + -calcRotation(amount, i) + "deg)";
     }
+    useWebSocket("acknowledge_last_card", data => {
+        if (playerUUID==data.player) {
+            setShowAckLastCard(true);
+            setTimeout(() => {
+                setShowAckLastCard(false);
+            }, 3500);
+        }
+    })
     return (
-        <div className="opponent-inventory" tabIndex={0}>
+        <div className={`opponent-inventory ${active?"active-opponent-inventory":""}`} tabIndex={0}>
             <p className="opponent-inventory-player-name">{playerName}</p>
 
             <div className="opponent-inventory-large">
-                <div className={`opponent-inventory-cards-container ${active?"active-opponent-inventory":""}`}>
+                <div className="opponent-inventory-cards-container">
                     {[...Array(amount)].map((_, i) => (
                         <div className="opponent-inventory-card-container"
                             key={i}
@@ -26,10 +38,11 @@ export default function OpponentInventory({playerName, amount, active}) {
                 </div>
             </div>
             <div className="opponent-inventory-small">
-                <div className={`opponent-inventory-number-card ${active?"active-opponent-inventory":""}`}>
+                <div className="opponent-inventory-number-card">
                     <p>{amount}</p>
                 </div>
             </div>
+            {showAckLastCard&&<p className="ack-last-card">UNU!!</p>}
 
         </div>
     )

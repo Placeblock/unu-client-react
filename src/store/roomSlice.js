@@ -14,7 +14,8 @@ const initialState = {
       wish_on_plus4: true,
       plus4_on_wish: true,
       wish_on_wish: true,
-      skip_on_inverse2_players: true
+      skip_on_inverse2_players: true,
+      auto_next_no_choice: false
     },
     "chat": {
       "messages": []

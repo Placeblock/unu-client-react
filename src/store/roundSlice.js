@@ -35,7 +35,7 @@ export const roundSlice = createSlice({
         state.value.players = action.payload;
     },
     removePlayer: (state, action) => {
-        const i = state.value.players.findIndex(player => player.uuid==action.payload);
+        const i = state.value.players.indexOf(action.uuid);
         state.value.players.splice(i, 1);
     },
     setInventory: (state, action) => {

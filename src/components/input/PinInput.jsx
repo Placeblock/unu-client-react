@@ -50,12 +50,12 @@ export default function PinInput({length, onSubmit=()=>{}}) {
     function keyHandler(event) {
       if (event.keyCode === 8) {
         event.preventDefault();
-        if (value == "") {
+        if (value === "") {
           onBack();
         } else {
           setValue("");
         }
-      } else if (!/[0-9]/.test(event.key)) {
+      } else if (!(/[0-9]/.test(event.key))) {
         event.preventDefault();
       }
     }
@@ -63,7 +63,7 @@ export default function PinInput({length, onSubmit=()=>{}}) {
       let newvalue = event.target.value % 10;
       setValue(newvalue)
       onUpdate(newvalue);
-      if (newvalue != "") {
+      if (newvalue !== "") {
         onNext();
       }
     }

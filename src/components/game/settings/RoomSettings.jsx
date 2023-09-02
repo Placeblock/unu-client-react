@@ -53,6 +53,7 @@ export default function RoomSettings({onClose}) {
                     <RoomSettingsSwitchItem title={"4+ on Wish"} name={"plus4_on_wish"} onUpdate={handleUpdate} disabled={disabled}/>
                     <RoomSettingsSwitchItem title={"Wish on Wish"} name={"wish_on_wish"} onUpdate={handleUpdate} disabled={disabled}/>
                     <RoomSettingsSwitchItem title={"Inverse play again"} name={"skip_on_inverse2_players"} onUpdate={handleUpdate} disabled={disabled}/>
+                    <RoomSettingsSwitchItem title={"Auto next no Choice"} name={"auto_next_no_choice"} onUpdate={handleUpdate} disabled={disabled}/>
                     <div className="open-card-deck-button-container">
                         <button className="button open-card-deck-button" onClick={toggleCardDeckEdit}>Edit Card-Stack</button>
                     </div>

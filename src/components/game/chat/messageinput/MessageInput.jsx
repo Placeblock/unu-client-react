@@ -22,7 +22,7 @@ export default function MessageInput({onSubmit, focus}) {
         }
     }
     function handleChange(e) {
-        setContent(e.target.value.substring(0,2000));
+        setContent(e.target.value.substring(0,1000));
     }
     return (
         <form id="testForm" method="post" className="message-input-container" onSubmit={handleSubmit}>

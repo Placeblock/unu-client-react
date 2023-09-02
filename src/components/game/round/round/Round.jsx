@@ -3,13 +3,15 @@ import Inventory from "../inventory/Inventory"
 import Pile from "../pile/Pile"
 import OpponentInventoryList from "../opponentinventorylist/OpponentInventoryList"
 import { useDispatch, useSelector } from "react-redux"
-import { addCard, removeCard, removePlayer, setCurrentCard, setCurrentPlayer, setDrawStack, setPlayerCards, setShowColorPicker, sortInventory } from "../../../../store/roundSlice"
+import { addCard, removeCard, removePlayer, setCurrentCard, setCurrentPlayer, setDrawStack, setPlayerCards, setShowColorPicker } from "../../../../store/roundSlice"
 import CurrentCard from "../currentcard/CurrentCard"
 import { useCallback, useContext } from "react"
 import { WebsocketContext } from "../../../websocket/WebSocketContext"
 import useWebSocket from "../../../websocket/WebSocketHook"
 import RoundControls from "../roundcontrols/RoundControls"
 import ColorPicker from "../colorpicker/ColorPicker"
+import playCardSound from "../../../../assets/playCard.mp3"
+import ackLastCardSound from "../../../../assets/ackLastCard.mp3"
 
 
 export default function Round() {
@@ -31,9 +33,15 @@ export default function Round() {
     })
     useWebSocket("current_card", data => {
       dispatch(setCurrentCard(data.card));
+      let audio = new Audio(playCardSound);
+      audio.play();
     })
     useWebSocket("select_color", _ => {
       dispatch(setShowColorPicker(true));
+    })
+    useWebSocket("acknowledge_last_card", _ => {
+      let audio = new Audio(ackLastCardSound);
+      audio.play();
     })
     useWebSocket("player_card_amount", data => {
       dispatch(setPlayerCards({
