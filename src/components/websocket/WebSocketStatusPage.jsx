@@ -25,6 +25,7 @@ export default memo(function WebSocketStatusPage() {
         <div className="websocket-status-page">
             <Logo />
             <WebSocketStatus status={status} retries={retries}/>
+            <p className="credits">Created with ❤️ by Placeblock</p>
         </div>
     )
 });

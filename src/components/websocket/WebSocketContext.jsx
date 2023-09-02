@@ -72,7 +72,7 @@ export const WebsocketProvider = ({children}) => {
     }
 
     function connect() {
-        const socket = new WebSocket("ws://localhost:8050");
+        const socket = new WebSocket("wss://unu.codelix.de/wss");
         ws.current = socket;
 
         socket.onopen = e => {
@@ -92,7 +92,7 @@ export const WebsocketProvider = ({children}) => {
         
         socket.onclose = e => {
             if (e.code >= 3000) return;
-            if (retries < 10) {
+            if (retriesRef.current <= 10) {
                 const reloadID = setTimeout(reconnect, 5000);
                 reloadTimer.current = reloadID;
             } else {

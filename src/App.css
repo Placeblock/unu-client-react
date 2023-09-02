@@ -41,7 +41,7 @@ button:hover {
   border: none;
   border-radius: 10px;
   box-shadow: 0px 0px 10px black;
-  transition: scale 0.1s ease-in-out;
+  transition: transform 0.1s ease-in-out;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -62,11 +62,18 @@ button:hover {
   background-color: var(--positive-color);
 }
 .button:hover {
-  scale: 1.1;
+  transform: scale(1.05);
 }
 .dark-container {
   box-shadow: 0px 0px 20px var(--dark-color);
   padding: 20px;
   border-radius: 20px;
   background-color: var(--dark-color);
+}
+
+.credits {
+  bottom: 2px;
+  right: 10px;
+  position: fixed;
+  color: white;
 }

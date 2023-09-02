@@ -1,25 +1,27 @@
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./Card.css"
+import { faBan, faRotate } from "@fortawesome/free-solid-svg-icons";
 
 export default function Card({back=false, card={}}) {
-    let text = "";
+    let text = <span>U</span>;
     switch (card.type) {
         case "draw_4":
-            text = "+4";
+            text = <span>+4</span>;
             break;
         case "draw_2":
-            text = "+2";
+            text = <span>+2</span>;
             break;
         case "invert_direction":
-            text = "I";
+            text = <FontAwesomeIcon icon={faRotate} />;
             break;
         case "number":
-            text = card.number
+            text = <span>{card.number}</span>
             break;
         case "suspend":
-            text = "S";
+            text = <FontAwesomeIcon icon={faBan} />;
             break;
         case "wish":
-            text = "W";
+            text = <span>?</span>;
             break;
     }
     return (

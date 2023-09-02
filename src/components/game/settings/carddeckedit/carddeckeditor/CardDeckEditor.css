@@ -20,12 +20,15 @@
 
 .card-deck-edit-controls h1 {
     color: var(--primary-color);
+    font-size: 28px;
+    line-height: 50px;
 }
 .card-deck-edit-controls p {
     color: gray;
 }
 
-.card-deck-edit-buttons {
+.card-deck-edit-buttons{
+    max-width: 100%;
     display: flex;
     gap: 10px;
 }

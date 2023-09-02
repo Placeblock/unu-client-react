@@ -21,9 +21,12 @@ export default function MessageInput({onSubmit, focus}) {
             inputElement.focus()
         }
     }
+    function handleChange(e) {
+        setContent(e.target.value.substring(0,2000));
+    }
     return (
         <form id="testForm" method="post" className="message-input-container" onSubmit={handleSubmit}>
-            <input ref={r => inputElement = r} name="content" className="input message-input" value={content} onChange={e => setContent(e.target.value)}/>
+            <input ref={r => inputElement = r} name="content" className="input message-input" value={content} onChange={handleChange}/>
             <button type="submit" className="button send-message-button"><FontAwesomeIcon icon={faPaperPlane} /></button>
         </form>
     )

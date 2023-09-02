@@ -43,7 +43,7 @@ export default function Join() {
     })
 
     function joinRoom(roomID) {
-        sendMessage("join_room", {code:Number(roomID)});
+        sendMessage("join_room", {code:roomID});
         setState(State.LOADING);
     }
     function createRoom() { 
@@ -79,6 +79,7 @@ export default function Join() {
                     <LoadingSpinner />
                 </div>
             }
+            <p className="credits">Created with ❤️ by Placeblock</p>
         </div>
     )
 }

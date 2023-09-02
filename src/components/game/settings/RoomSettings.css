@@ -21,6 +21,7 @@
 
 .room-settings-contents {
     overflow-y: auto;
+    overflow-x: visible;
     min-height: 0px;
     flex-grow: 1;
 }
@@ -44,6 +45,15 @@
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.open-card-deck-button-container {
+    max-width: 100%;
+    overflow: hidden;
+}
+
+.open-card-deck-button-container button {
+    width: 100%;
 }
 
 @media only screen and (min-width: 769px) {
