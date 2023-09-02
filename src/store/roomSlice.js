@@ -8,13 +8,13 @@ export const roomSlice = createSlice({
       "code":undefined,
       "players": [],
       "settings": {
-        startCardAmount: 7,
-        plus4OnPlus4: true,
-        plus2OnPlus4: false,
-        plus4OnPlus2: true,
-        wishOnPlus4: true,
-        plus4OnWish: true,
-        wishOnWish: true,
+        start_card_amount: 7,
+        plus4_on_plus4: true,
+        plus2_on_plus4: false,
+        plus4_on_plus2: true,
+        wish_on_plus4: true,
+        plus4_on_wish: true,
+        wish_on_wish: true,
       },
       "chat": {
         "messages": []

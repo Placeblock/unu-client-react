@@ -7,7 +7,7 @@ export const State = {
     CLOSED: 2
 }
 
-export const WebsocketContext = createContext(State.CONNECTING, null, );
+export const WebsocketContext = createContext(State.CONNECTING, null);
 
 export const WebsocketProvider = ({children}) => {
     const [status, setStatus] = useState(State.CONNECTING)

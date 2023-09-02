@@ -47,7 +47,7 @@ function getHex(color) {
         case "GREEN":
             return "#32ba4d"
         case "YELLOW":
-            return "#ebeb00"
+            return "#fcb103"
         default:
             return "#000000"
     }

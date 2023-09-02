@@ -61,3 +61,9 @@ button:hover {
 .button:hover {
   scale: 1.1;
 }
+.dark-container {
+  box-shadow: 0px 0px 20px var(--dark-color);
+  padding: 20px;
+  border-radius: 20px;
+  background-color: var(--dark-color);
+}

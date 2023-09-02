@@ -1,8 +1,13 @@
 import "./Inventory.css"
 
 import Card from "../../../card/Card";
+import { useContext } from "react";
+import { WebsocketContext } from "../../../websocket/WebSocketContext";
+import { useSelector } from "react-redux";
 
-export default function Inventory({cards}) {
+export default function Inventory() {
+    const cards = useSelector(state => state.round.value.inventory);
+    const {sendMessage} = useContext(WebsocketContext);
     const amount = cards.length;
 
     function getTransform(i) {
@@ -10,12 +15,16 @@ export default function Inventory({cards}) {
         const rot = calcRotation(amount, i);
         return "translateX("+trans+"px) rotate(" + rot + "deg)";
     }
+    function handlePlace(uuid) {
+        sendMessage("place_card", {"uuid":uuid});
+    }
+
     return (
         <div className="inventory">
             {cards.map((c, i) => (
                 <button className="inventory-card" 
-                    onClick={() => console.log("TEST")}
-                    key={i}
+                    onClick={() => handlePlace(c.uuid)}
+                    key={c.uuid}
                     style={{transform: getTransform(i)}}>
                     <Card card={c}/>
                 </button>

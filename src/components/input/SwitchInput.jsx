@@ -11,13 +11,13 @@ export default function SwitchInput({onSwitch, toggled, disabled}) {
     }
 
     return (
-        <div className={`switch-input 
+        <button className={`switch-input 
                 ${toggled?"switch-input-on":"switch-input-off"} 
                 ${disabled?"switch-input-disabled":""}`} onClick={handleClick}>
             {toggled?
                 <FontAwesomeIcon icon={faToggleOn} />:
                 <FontAwesomeIcon icon={faToggleOff} />
             }
-        </div>
+        </button>
     )
 }

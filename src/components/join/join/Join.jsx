@@ -13,6 +13,8 @@ import { setMessages, setOwner } from "../../../store/roomSlice"
 import { setCode, setState as setRoomState } from "../../../store/roomSlice"
 import { setPlayers } from "../../../store/roomSlice"
 import { setSettings } from "../../../store/roomSlice"
+import { setCardStack } from "../../../store/cardStackSlice"
+import { setRoundData } from "../../../store/roundSlice"
 
 
 const State = {
@@ -49,13 +51,17 @@ export default function Join() {
         setState(State.LOADING);
     }
     useWebSocket("room_data", (data) => {
-        dispatch(setMessages(data.roomData.chat.messages));
-        dispatch(setCode(data.roomData.code));
-        dispatch(setPlayers(data.roomData.players));
-        dispatch(setSettings(data.roomData.roundSettings));
-        dispatch(setRoomState(data.roomData.state));
-        dispatch(setOwner(data.roomData.owner));
-        navigate("/" + data.roomData.code);
+        dispatch(setMessages(data.room_data.chat.messages));
+        dispatch(setCode(data.room_data.code));
+        dispatch(setPlayers(data.room_data.players));
+        dispatch(setSettings(data.room_data.round_settings));
+        dispatch(setRoomState(data.room_data.state));
+        dispatch(setOwner(data.room_data.owner));
+        dispatch(setCardStack(data.room_data.card_stack.groups));
+        if (data.room_data.round != null) {
+            setRoundData(dispatch, data.room_data.round);
+        }
+        navigate("/" + data.room_data.code);
     })
 
     return (

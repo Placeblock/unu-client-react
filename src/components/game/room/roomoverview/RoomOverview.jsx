@@ -15,7 +15,7 @@ export default function RoomOverview({onToggleSettings, onStart}) {
 
     return (
         <div className="room-overview">
-            <div className="room-info room-overview-container">
+            <div className="room-info room-overview-container dark-container">
                 <h1 className="room-info-header">Room: {code}</h1>
                 <div className="room-info-controls">
                     <button className="button icon-button copy-code-button" onClick={copyCode}>
@@ -28,7 +28,7 @@ export default function RoomOverview({onToggleSettings, onStart}) {
                     <AppTooltip id="open-settings-button" content="Open Settings (s)" />
                 </div>
             </div>
-            <div className="player-list-container room-overview-container">
+            <div className="player-list-container room-overview-container dark-container">
                 <PlayerList />
             </div>
             <div className="start-button-container">
