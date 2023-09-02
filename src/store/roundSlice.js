@@ -1,8 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 
-export const roundSlice = createSlice({
-  name: 'user',
-  initialState: {
+const initialState = {
     value: {
         currentPlayer: null,
         currentCard: null,
@@ -17,7 +15,11 @@ export const roundSlice = createSlice({
             
         ]
     }
-  },
+  }
+
+export const roundSlice = createSlice({
+  name: 'user',
+  initialState: initialState,
   reducers: {
     setCurrentCard: (state, action) => {
         state.value.currentCard = action.payload;
@@ -50,13 +52,14 @@ export const roundSlice = createSlice({
     },
     setPlayerCards: (state, action) => {
         state.value.playerCards[action.payload.uuid] = action.payload.amount;
-    }
+    },
+    resetRound: () => initialState
   }
 })
 
 export const { setCurrentPlayer, setDrawStack, setPlayers,
     removePlayer, setInventory, addCard, setPlayersCards,
-    setPlayerCards, setCurrentCard, removeCard } = roundSlice.actions
+    setPlayerCards, setCurrentCard, removeCard, resetRound } = roundSlice.actions
 
 export function setRoundData(dispatch, roundData) {
     dispatch(setCurrentPlayer(roundData.current_player));

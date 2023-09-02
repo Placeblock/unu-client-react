@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 
-export const cardStackSlice = createSlice({
+export const cardDeckSlice = createSlice({
   name: 'user',
   initialState: {
     value: [
@@ -8,7 +8,7 @@ export const cardStackSlice = createSlice({
     ]
   },
   reducers: {
-    setCardStack: (state, action) => {
+    setCardDeck: (state, action) => {
         state.value = action.payload
     },
     addGroup: (state, action) => {
@@ -26,6 +26,6 @@ export const cardStackSlice = createSlice({
   }
 })
 
-export const { setCardStack } = cardStackSlice.actions
+export const { setCardDeck } = cardDeckSlice.actions
 
-export default cardStackSlice.reducer
+export default cardDeckSlice.reducer

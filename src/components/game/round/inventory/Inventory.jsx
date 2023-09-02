@@ -7,6 +7,8 @@ import { useSelector } from "react-redux";
 
 export default function Inventory() {
     const cards = useSelector(state => state.round.value.inventory);
+    const currentPlayer = useSelector(state => state.round.value.currentPlayer);
+    const user = useSelector(state => state.user.value.uuid);
     const {sendMessage} = useContext(WebsocketContext);
     const amount = cards.length;
 
@@ -20,7 +22,7 @@ export default function Inventory() {
     }
 
     return (
-        <div className="inventory">
+        <div className={`inventory ${currentPlayer!=user?"inventory-disabled":""}`}>
             {cards.map((c, i) => (
                 <button className="inventory-card" 
                     onClick={() => handlePlace(c.uuid)}

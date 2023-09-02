@@ -1,27 +1,32 @@
 import { createSlice } from '@reduxjs/toolkit'
 
+const initialState = {
+  value: {
+    "status":"LOBBY",
+    "code":undefined,
+    "players": [],
+    "settings": {
+      start_card_amount: 7,
+      plus4_on_plus4: true,
+      plus2_on_plus4: false,
+      plus4_on_plus2: true,
+      wish_on_plus4: true,
+      plus4_on_wish: true,
+      wish_on_wish: true,
+    },
+    "chat": {
+      "messages": []
+    },
+    "owner": undefined,
+    "cardDeckPresets": [
+
+    ]
+  }
+}
+
 export const roomSlice = createSlice({
   name: 'room',
-  initialState: {
-    value: {
-      "status":"LOBBY",
-      "code":undefined,
-      "players": [],
-      "settings": {
-        start_card_amount: 7,
-        plus4_on_plus4: true,
-        plus2_on_plus4: false,
-        plus4_on_plus2: true,
-        wish_on_plus4: true,
-        plus4_on_wish: true,
-        wish_on_wish: true,
-      },
-      "chat": {
-        "messages": []
-      },
-      "owner": undefined
-    }
-  },
+  initialState: initialState,
   reducers: {
     setCode: (state, action) => {
       state.value.code = action.payload
@@ -67,7 +72,11 @@ export const roomSlice = createSlice({
     },
     setMessages: (state, action) => {
       state.value.chat.messages = action.payload;
-    }
+    },
+    setCardDeckPresets: (state, action) => {
+      state.value.cardDeckPresets = action.payload;
+    },
+    resetRoom: () => initialState
   }
 })
 
@@ -78,6 +87,6 @@ export function findPlayer(players, uuid) {
 export const { setCode, setState, setOwner, 
     setSetting, setSettings, addPlayer, setPlayerName, 
     removePlayer, removePlayers, setPlayers, addMessage, 
-    removeMessage, removeMessages, setMessages } = roomSlice.actions
+    removeMessage, removeMessages, setMessages, setCardDeckPresets, resetRoom } = roomSlice.actions
 
 export default roomSlice.reducer

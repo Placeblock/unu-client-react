@@ -27,7 +27,7 @@ allCards.push({"type":"draw_4"})
 
 export default function CreateCardGroup({onFinish}) {
     const [selected, setSelected] = useState({});
-    const groups = useSelector(state => state.cardStack.value);
+    const groups = useSelector(state => state.cardDeck.value);
     const {sendMessage} = useContext(WebsocketContext);
 
     function select(index) {
@@ -64,7 +64,7 @@ export default function CreateCardGroup({onFinish}) {
         for (let i in selected) {
             cards.push(allCards[i]);
         }
-        sendMessage("card_stack", {card_stack: {groups: [...groups, {
+        sendMessage("card_deck", {card_deck: {groups: [...groups, {
             cards: cards,
             amount: 1
         }]}});
@@ -72,13 +72,13 @@ export default function CreateCardGroup({onFinish}) {
     }
 
     return (
-        <div className="card-stack-edit-page">
-            <div className="card-stack-edit-controls">
-                <div className="card-stack-edit-title">
+        <div className="card-deck-edit-page">
+            <div className="card-deck-edit-controls">
+                <div className="card-deck-edit-title">
                     <h1>Create Card-Group</h1>
                     <p>Select cards for the new group.</p>
                 </div>
-                <div className="card-stack-edit-buttons">
+                <div className="card-deck-edit-buttons">
                     {!isEmpty()&&<><button className="button icon-button positive-button create-card-group-button"
                                             onClick={createGroup}>
                         <FontAwesomeIcon icon={faPlus}/>
@@ -91,7 +91,7 @@ export default function CreateCardGroup({onFinish}) {
                     <AppTooltip id="toggle-show-create-group-button" content={"Cancel"} />
                 </div>
             </div>
-            <div className="card-stack-edit-content">
+            <div className="card-deck-edit-content">
                 <div className="create-group-cards-container">
                     {allCards.map((c, i) => (
                         <div key={i} className={`create-card-group-card ${isSelected(i)?"":"ccgc-unselected"}`} onClick={() => toggleSelected(i)}><Card card={c}/></div>

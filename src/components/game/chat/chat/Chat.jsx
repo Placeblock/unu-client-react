@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { memo, useContext } from "react";
 import MessageInput from "../messageinput/MessageInput";
 import MessageList from "../messagelist/MessageList";
 import "./Chat.css"
@@ -9,7 +9,7 @@ import { WebsocketContext } from "../../../websocket/WebSocketContext";
 import useWebSocket from "../../../websocket/WebSocketHook";
 
 
-export default function Chat({focus}) {
+export default memo(function Chat({focus}) {
     const messages = useSelector(state => state.room.value.chat.messages);
     const {sendMessage} = useContext(WebsocketContext);
     const players = useSelector(state => state.room.value.players);
@@ -39,4 +39,4 @@ export default function Chat({focus}) {
         </div>
     )
 
-}
+})

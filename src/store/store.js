@@ -1,14 +1,14 @@
 import { configureStore } from "@reduxjs/toolkit";
 import userSlice from "./userSlice";
 import roomSlice from "./roomSlice";
-import cardStackSlice from "./cardStackSlice";
+import cardDeckSlice from "./cardDeckSlice";
 import roundSlice from "./roundSlice";
 
 export default configureStore({
     reducer: {
         user: userSlice,
         room: roomSlice,
-        cardStack: cardStackSlice,
+        cardDeck: cardDeckSlice,
         round: roundSlice
     }
 })

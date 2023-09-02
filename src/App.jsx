@@ -1,13 +1,14 @@
 import { useContext } from 'react';
 import './App.css'
 import { State, WebsocketContext } from './components/websocket/WebSocketContext';
-import WebSocketStatus from './components/websocket/WebSocketStatus';
 import { Navigate, RouterProvider, createBrowserRouter } from 'react-router-dom';
 import Room from './components/game/room/Room';
 import Join from './components/join/join/Join';
 import useWebSocket from './components/websocket/WebSocketHook';
 import { useDispatch } from 'react-redux';
 import { setUserName, setUserUUID } from './store/userSlice';
+import WebSocketStatusPage from './components/websocket/WebSocketStatusPage';
+import { setCardDeckPresets } from './store/roomSlice';
 
 const router = createBrowserRouter([
   {
@@ -32,12 +33,16 @@ function App() {
     dispatch(setUserUUID(data.player.uuid))
     dispatch(setUserName(data.player.name))
   })
+  useWebSocket("card_deck_presets", data => {
+    console.log(data.presets);
+    dispatch(setCardDeckPresets(data.presets));
+  })
 
   return (
     <div id="app">
       {status == State.CONNECTED?
         <RouterProvider router={router} />:
-        <WebSocketStatus />
+        <WebSocketStatusPage />
       }
     </div>
   )

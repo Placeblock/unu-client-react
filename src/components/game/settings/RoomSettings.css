@@ -57,12 +57,12 @@
     }
 }
 
-.open-card-stack-button {
+.open-card-deck-button {
     padding: 10px;
     font-size: 20px;
 }
 
-.card-stack-edit-container {
+.card-deck-edit-container {
     position: fixed;
     left: 50%;
     top: 50%;

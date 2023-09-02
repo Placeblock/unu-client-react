@@ -5,9 +5,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCopy } from "@fortawesome/free-regular-svg-icons";
 import AppTooltip from "../../../tooltip/AppTooltip";
 import { faPlay, faSliders } from "@fortawesome/free-solid-svg-icons";
+import { memo } from "react";
 
-export default function RoomOverview({onToggleSettings, onStart}) {
+export default memo(function RoomOverview({onToggleSettings, onStart}) {
     const code = useSelector(state => state.room.value.code);
+    const players = useSelector(state => state.room.value.players);
+    const owner = useSelector(state => state.room.value.owner);
+    const user = useSelector(state => state.user.value.uuid);
     
     function copyCode() {
         navigator.clipboard.writeText(code);
@@ -31,12 +35,12 @@ export default function RoomOverview({onToggleSettings, onStart}) {
             <div className="player-list-container room-overview-container dark-container">
                 <PlayerList />
             </div>
-            <div className="start-button-container">
+            {players.length > 1 && owner===user && <div className="start-button-container">
                 <button className="button positive-button start-button" onClick={onStart}>
                     <FontAwesomeIcon icon={faPlay} />
                 </button>
                 <AppTooltip id="start-button" content="Start Game (p)" />
-            </div>
+            </div>}
         </div>
     )
-}
+})

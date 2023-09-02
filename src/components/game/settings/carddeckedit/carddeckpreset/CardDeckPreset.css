@@ -1,0 +1,15 @@
+.card-deck-preset {
+    background-color: var(--background-color);
+    padding: 15px;
+    border-radius: 10px;
+    border: none;
+    text-align: left;
+}
+
+.card-deck-preset h2 {
+    color: var(--primary-color);
+}
+
+.card-deck-preset p {
+    color: gray;
+}

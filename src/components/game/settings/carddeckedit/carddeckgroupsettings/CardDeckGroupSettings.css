@@ -5,7 +5,17 @@
     overflow-x: hidden;
     display: flex;
     flex-wrap: wrap;
+    align-content: flex-start;
     gap: 10px;
     justify-content: center;
     height: 100%;
+}
+
+.import-deck-input {
+    position: fixed;
+    left: -100%;
+}
+
+.group-settings-controls {
+    flex-wrap: wrap;
 }

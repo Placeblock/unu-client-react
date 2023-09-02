@@ -2,7 +2,6 @@ import "./OpenChatButton.css"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faComment } from "@fortawesome/free-regular-svg-icons"
 import useKeyBind from "../../../../hooks/KeyBindHook"
-import { Tooltip } from 'react-tooltip'
 import AppTooltip from "../../../tooltip/AppTooltip"
 
 export default function OpenChatButton({onToggle}) {

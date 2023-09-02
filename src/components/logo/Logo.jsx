@@ -1,12 +1,8 @@
+import { memo } from "react";
 import Card from "../card/Card"
 import "./Logo.css"
 
-
-const rotations = [
-
-]
-
-export default function Logo() {
+export default memo(function Logo() {
     return (
         <div className="logo">
             <div className="logo-cards-container">
@@ -23,4 +19,4 @@ export default function Logo() {
             <h1>UNU!</h1>
         </div>
     )
-}
+});

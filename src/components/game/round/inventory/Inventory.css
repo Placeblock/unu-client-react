@@ -18,3 +18,8 @@
     transform: translateY(-20px) scale(1.05);
     cursor: pointer;
 }
+
+.inventory-disabled {
+    opacity: 0.5;
+    pointer-events: none;
+}

@@ -1,4 +1,4 @@
-import { Outlet, useNavigate, useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 import Logo from "../../logo/Logo"
 import "./Join.css"
 import { useContext, useState } from "react"
@@ -13,7 +13,7 @@ import { setMessages, setOwner } from "../../../store/roomSlice"
 import { setCode, setState as setRoomState } from "../../../store/roomSlice"
 import { setPlayers } from "../../../store/roomSlice"
 import { setSettings } from "../../../store/roomSlice"
-import { setCardStack } from "../../../store/cardStackSlice"
+import { setCardDeck } from "../../../store/cardDeckSlice"
 import { setRoundData } from "../../../store/roundSlice"
 
 
@@ -57,7 +57,7 @@ export default function Join() {
         dispatch(setSettings(data.room_data.round_settings));
         dispatch(setRoomState(data.room_data.state));
         dispatch(setOwner(data.room_data.owner));
-        dispatch(setCardStack(data.room_data.card_stack.groups));
+        dispatch(setCardDeck(data.room_data.card_deck.groups));
         if (data.room_data.round != null) {
             setRoundData(dispatch, data.room_data.round);
         }

@@ -1,7 +1,7 @@
 import "./Room.css";
 import ChatOverlay from "../chat/chatoverlay/ChatOverlay";
 import { useNavigate, useParams } from "react-router-dom";
-import { useCallback, useContext, useEffect, useRef, useState } from "react";
+import { useCallback, useContext, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import useWebSocket from "../../websocket/WebSocketHook";
 import { addPlayer, removePlayer, setOwner, setSettings, setState } from "../../../store/roomSlice";
@@ -14,7 +14,7 @@ import useKeyBind from "../../../hooks/KeyBindHook";
 import RoomSettings from "../settings/RoomSettings";
 import Round from "../round/round/Round";
 import { WebsocketContext } from "../../websocket/WebSocketContext";
-import { setCardStack } from "../../../store/cardStackSlice";
+import { setCardDeck } from "../../../store/cardDeckSlice";
 import { setInventory, setRoundData } from "../../../store/roundSlice";
 
 export default function Room() {
@@ -22,27 +22,9 @@ export default function Room() {
     const {sendMessage} = useContext(WebsocketContext);
     const code = useSelector(state => state.room.value.code);
     const status = useSelector(state => state.room.value.status);
-    const [showSettings, _setShowSettings] = useState(false);
-    const showSettingsRef = useRef(showSettings);
-    const toggleSettings = () => {
-        const current = showSettingsRef.current;
-        _setShowSettings(!current)
-        showSettingsRef.current = !current;
-    }
-    const [showChat, _setShowChat] = useState(false);
-    const showChatRef = useRef(showChat);
-    const toggleShowChat = () => {
-        const current = showChatRef.current;
-        _setShowChat(!current)
-        showChatRef.current = !current;
-    }
-    const [showControls, _setShowControls] = useState(false);
-    const showControlsRef = useRef(showControls);
-    const toggleShowControls = () => {
-        const current = showControlsRef.current;
-        _setShowControls(!current)
-        showControlsRef.current = !current;
-    }
+    const [showSettings, setShowSettings] = useState(false);
+    const [showChat, setShowChat] = useState(false);
+    const [showControls, setShowControls] = useState(false);
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
@@ -66,8 +48,8 @@ export default function Room() {
     useWebSocket("round_settings", data => {
         dispatch(setSettings(data.round_settings));
     })
-    useWebSocket("card_stack", data => {
-        dispatch(setCardStack(data.card_stack.groups));
+    useWebSocket("card_deck", data => {
+        dispatch(setCardDeck(data.card_deck.groups));
     })
     useWebSocket("room_state", data => {
         dispatch(setState(data.state));
@@ -76,19 +58,16 @@ export default function Room() {
         setRoundData(dispatch, data.round_data);
     })
     useWebSocket("inventory", data => {
-        console.log(data.inventory.cards);
         dispatch(setInventory(data.inventory.cards));
     })
 
     useKeyBind("Escape", () => {
-        if (showChat) {
-            toggleShowChat();
-        }
-    }, [showChat]);
+        setShowChat(false);
+    });
 
 
     useKeyBind("KeyS", () => {
-        toggleSettings();
+        toggleShowSettings();
     })
     useKeyBind("KeyP", () => {
         startRound();
@@ -97,6 +76,17 @@ export default function Room() {
     const startRound = useCallback(() =>  {
         sendMessage("start_round", {});
     }, []);
+
+    const toggleShowSettings = useCallback(() => {
+        setShowSettings(ss => !ss);
+    }, [])
+    const toggleShowChat = useCallback(() => {
+        setShowChat(sc => !sc);
+    }, [])
+    const toggleShowControls = useCallback(() => {
+        setShowControls(sc => !sc);
+    }, [])
+
 
     return (
         <div className="room">
@@ -112,8 +102,8 @@ export default function Room() {
                         <LeaveRoomButton onLeave={() => {}}/>
                     </div>
                     <ChatOverlay showChat={showChat} />
-                    {showSettings&&<RoomSettings onClose={toggleSettings} />}
-                    <RoomOverview onToggleSettings={toggleSettings} onStart={startRound} />
+                    {showSettings&&<RoomSettings onClose={toggleShowSettings} />}
+                    <RoomOverview onToggleSettings={toggleShowSettings} onStart={startRound} />
                 </>:
                 <Round />
             }
