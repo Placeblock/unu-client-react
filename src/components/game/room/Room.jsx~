@@ -93,7 +93,6 @@ export default function Room() {
         sendMessage("leave_room", {});
         dispatch(resetRoom())
         dispatch(resetRound())
-        navigate("/join")
     });
 
     return (

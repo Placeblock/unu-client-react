@@ -1,4 +1,5 @@
 .round-controls {
+    position: relative;
     display: flex;
     border-radius: 10px;
     background-color: var(--dark-color);
@@ -21,4 +22,15 @@
 
 .skip-button {
     color: var(--positive-color);
+}
+
+.open-reaction-menu-button {
+    color: var(--card-yellow)
+}
+
+.reaction-menu-container {
+    position: absolute;
+    top: -60px;
+    left: 50%;
+    transform: translateX(-50%);
 }

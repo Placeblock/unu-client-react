@@ -3,9 +3,12 @@ import "./OpponentInventory.css"
 import { calcRotation } from "../inventory/Inventory";
 import useWebSocket from "../../../websocket/WebSocketHook";
 import { useState } from "react";
+import { getReaction } from "../quickreactions/ReactionItem";
 
 export default function OpponentInventory({playerUUID, playerName, amount, active}) {
     const [showAckLastCard, setShowAckLastCard] = useState(false);
+    const [showReaction, setShowReaction] = useState(false);
+    const [lastReaction, setLastReaction] = useState("");
 
     function calcTranslation(i) {
         const betweencardsx = 5;
@@ -20,6 +23,15 @@ export default function OpponentInventory({playerUUID, playerName, amount, activ
             setTimeout(() => {
                 setShowAckLastCard(false);
             }, 3500);
+        }
+    })
+    useWebSocket("quick_reaction", data => {
+        if (playerUUID==data.player) {
+            setLastReaction(data.quick_reaction);
+            setShowReaction(true);
+            setTimeout(() => {
+                setShowReaction(false);
+            }, 7000);
         }
     })
     return (
@@ -43,7 +55,7 @@ export default function OpponentInventory({playerUUID, playerName, amount, activ
                 </div>
             </div>
             {showAckLastCard&&<p className="ack-last-card">UNU!!</p>}
-
+            {showReaction&&<p className="reaction">{getReaction(lastReaction)}</p>}
         </div>
     )
 }
