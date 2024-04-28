@@ -16,6 +16,10 @@ import Round from "../round/round/Round";
 import { WebsocketContext } from "../../websocket/WebSocketContext";
 import { setCardDeck } from "../../../store/cardDeckSlice";
 import { resetRound, setInventory, setRoundData } from "../../../store/roundSlice";
+import { faMusic, faVolumeMute } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import AppTooltip from "../../tooltip/AppTooltip";
+import Music from "./music/Music";
 
 export default function Room() {
     const {id} = useParams();
@@ -25,6 +29,7 @@ export default function Room() {
     const [showSettings, setShowSettings] = useState(false);
     const [showChat, setShowChat] = useState(false);
     const [showControls, setShowControls] = useState(false);
+    const [playMusic, setPlayMusic] = useState(true);
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
@@ -102,11 +107,17 @@ export default function Room() {
                 <OpenControlsButton onToggle={toggleShowControls} />
             </div>
             <div className={`room-controls ${showControls?"room-controls-visible":""}`}>
+                <button className="button icon-button play-music-button" 
+                    onClick={() => setPlayMusic(!playMusic)}>
+                    <FontAwesomeIcon icon={playMusic ? faMusic : faVolumeMute} />
+                </button>
+                <AppTooltip id="open-chat-button" content="Mute/Play Music" />
                 <div className="open-chat-button-container">
                     <OpenChatButton onToggle={toggleShowChat} />
                 </div>
                 <LeaveRoomButton onLeave={handleLeave}/>
             </div>
+            <Music play={playMusic}/>
             <ChatOverlay showChat={showChat} />
             {status=="LOBBY"?
                 <>

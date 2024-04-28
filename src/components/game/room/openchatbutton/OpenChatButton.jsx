@@ -5,7 +5,6 @@ import useKeyBind from "../../../../hooks/KeyBindHook"
 import AppTooltip from "../../../tooltip/AppTooltip"
 
 export default function OpenChatButton({onToggle}) {
-
     useKeyBind("KeyC", () => {
         onToggle();
     });
