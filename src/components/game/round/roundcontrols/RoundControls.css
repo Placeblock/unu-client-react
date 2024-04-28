@@ -30,7 +30,8 @@
 
 .reaction-menu-container {
     position: absolute;
-    top: -60px;
+    top: -90px;
     left: 50%;
     transform: translateX(-50%);
+    width: 95%;
 }

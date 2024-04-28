@@ -22,6 +22,14 @@ export function getReaction(key) {
             return "😛"
         case "SAD":
             return "😢"
+        case "SHAKING":
+            return "🫨"
+        case "BORED":
+            return "😒"
+        case "INSPECTING":
+            return "🧐"
+        case "QUIET":
+            return "😑"
         default:
             return "";
     }

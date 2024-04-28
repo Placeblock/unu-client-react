@@ -18,6 +18,10 @@ export default memo(function ReactionMenu({onClose}) {
             <ReactionItem reactionKey={"FUNNY"} onReact={handleReaction}/>
             <ReactionItem reactionKey={"TONGUE"} onReact={handleReaction}/>
             <ReactionItem reactionKey={"SAD"} onReact={handleReaction}/>
+            <ReactionItem reactionKey={"SHAKING"} onReact={handleReaction}/>
+            <ReactionItem reactionKey={"BORED"} onReact={handleReaction}/>
+            <ReactionItem reactionKey={"INSPECTING"} onReact={handleReaction}/>
+            <ReactionItem reactionKey={"QUIET"} onReact={handleReaction}/>
         </div>
     )
 });
