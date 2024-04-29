@@ -9,7 +9,7 @@ import useWebSocket from "../../websocket/WebSocketHook"
 import NameInput from "../nameinput/NameInput"
 import RoomInput from "../roominput/RoomInput"
 import LoadingSpinner from "../../loading/LoadingSpinner"
-import { setMessages, setOwner } from "../../../store/roomSlice"
+import { setLeaderboard, setMessages, setOwner } from "../../../store/roomSlice"
 import { setCode, setState as setRoomState } from "../../../store/roomSlice"
 import { setPlayers } from "../../../store/roomSlice"
 import { setSettings } from "../../../store/roomSlice"
@@ -58,6 +58,7 @@ export default function Join() {
         dispatch(setRoomState(data.room_data.state));
         dispatch(setOwner(data.room_data.owner));
         dispatch(setCardDeck(data.room_data.card_deck.groups));
+        dispatch(setLeaderboard(data.room_data.leaderboard));
         if (data.room_data.round != null) {
             setRoundData(dispatch, data.room_data.round);
         }

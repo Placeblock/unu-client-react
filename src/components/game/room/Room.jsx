@@ -4,7 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useCallback, useContext, useEffect, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import useWebSocket from "../../websocket/WebSocketHook";
-import { addPlayer, removePlayer, resetRoom, setOwner, setSettings, setState } from "../../../store/roomSlice";
+import { addPlayer, removePlayer, resetRoom, setLeaderboard, setOwner, setSettings, setState } from "../../../store/roomSlice";
 import { setPlayerName } from "../../../store/roomSlice";
 import OpenChatButton from "./openchatbutton/OpenChatButton";
 import OpenControlsButton from "./opencontrolsbutton/OpenControlsButton";
@@ -72,6 +72,9 @@ export default function Room() {
     })
     useWebSocket("inventory", data => {
         dispatch(setInventory(data.inventory.cards));
+    })
+    useWebSocket("leaderboard", data => {
+        dispatch(setLeaderboard(data.leaderboard));
     })
 
     useKeyBind("Escape", () => {

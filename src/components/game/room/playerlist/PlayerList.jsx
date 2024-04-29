@@ -7,6 +7,7 @@ export default function PlayerList() {
     const players = useSelector(state => state.room.value.players);
     const owner = useSelector(state => state.room.value.owner);
     const user = useSelector(state => state.user.value.uuid);
+    const leaderboard = useSelector(state => state.room.value.leaderboard.points);
 
     return (
         <div className="player-list">
@@ -16,6 +17,7 @@ export default function PlayerList() {
                     <PlayerListItem 
                         isOwner={player.uuid==owner} 
                         isUser={player.uuid==user} 
+                        points={leaderboard[player.uuid]||0}
                         name={player.name} key={i}/>
                 ))}
             </div>

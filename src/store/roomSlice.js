@@ -23,7 +23,8 @@ const initialState = {
     "owner": undefined,
     "cardDeckPresets": [
 
-    ]
+    ],
+    "leaderboard": {}
   }
 }
 
@@ -79,7 +80,10 @@ export const roomSlice = createSlice({
     setCardDeckPresets: (state, action) => {
       state.value.cardDeckPresets = action.payload;
     },
-    resetRoom: () => initialState
+    resetRoom: () => initialState,
+    setLeaderboard: (state, action) => {
+      state.value.leaderboard = action.payload;
+    }
   }
 })
 
@@ -90,6 +94,7 @@ export function findPlayer(players, uuid) {
 export const { setCode, setState, setOwner, 
     setSetting, setSettings, addPlayer, setPlayerName, 
     removePlayer, removePlayers, setPlayers, addMessage, 
-    removeMessage, removeMessages, setMessages, setCardDeckPresets, resetRoom } = roomSlice.actions
+    removeMessage, removeMessages, setMessages, setCardDeckPresets, 
+    resetRoom, setLeaderboard } = roomSlice.actions
 
 export default roomSlice.reducer
