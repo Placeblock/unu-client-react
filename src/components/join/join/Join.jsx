@@ -28,6 +28,7 @@ export default function Join() {
     const {id} = useParams();
     const {sendMessage} = useContext(WebsocketContext);
     const [state, setState] = useState(State.NAME);
+    const [invalidRoom, setInvalidRoom] = useState(false);
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
@@ -43,7 +44,13 @@ export default function Join() {
         }
     })
 
+    useWebSocket("invalid_room", () => {
+        setState(State.ROOM);
+        setInvalidRoom(true);
+    })
+
     function joinRoom(roomID) {
+        setInvalidRoom(false);
         sendMessage("join_room", {code:roomID});
         setState(State.LOADING);
     }
@@ -74,7 +81,7 @@ export default function Join() {
                 <NameInput onSubmit={setName} />
             }
             {state==State.ROOM&&
-                <RoomInput onJoin={joinRoom} onCreate={createRoom} />
+                <RoomInput invalidRoom={invalidRoom} onJoin={joinRoom} onCreate={createRoom} />
             }
             {state==State.LOADING&&
                 <div className="join-content">
