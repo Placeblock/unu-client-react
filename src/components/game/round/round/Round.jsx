@@ -50,7 +50,7 @@ export default function Round() {
       }));
     })
     useWebSocket("player_left_round", data => {
-      dispatch(removePlayer(data.player));
+      dispatch(removePlayer({uuid: data.player}));
     })
     const handleDraw = useCallback(() => {
       sendMessage("draw_card", {});
