@@ -6,8 +6,12 @@ export default function Music({play}) {
     const ref = useRef(new Audio(music))
 
     useEffect(() => {
+        ref.current.volume = 0.1;
+    })
+
+    useEffect(() => {
         if (ref.current == null) return;
-        if (play) {
+        if (play && ref.current.paused) {
             ref.current.play()
         } else {
             ref.current.pause()

@@ -1,7 +1,7 @@
 import "./Room.css";
 import ChatOverlay from "../chat/chatoverlay/ChatOverlay";
 import { useNavigate, useParams } from "react-router-dom";
-import { useCallback, useContext, useEffect, useState } from "react";
+import { useCallback, useContext, useEffect, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import useWebSocket from "../../websocket/WebSocketHook";
 import { addPlayer, removePlayer, resetRoom, setOwner, setSettings, setState } from "../../../store/roomSlice";
@@ -20,13 +20,17 @@ import { faMusic, faVolumeMute } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import AppTooltip from "../../tooltip/AppTooltip";
 import Music from "./music/Music";
+import Particles, { initParticlesEngine } from "@tsparticles/react";
+import { loadSlim } from "@tsparticles/slim";
 
 export default function Room() {
-    const {id} = useParams();
-    const {sendMessage} = useContext(WebsocketContext);
+    const { id } = useParams();
+    const { sendMessage } = useContext(WebsocketContext);
     const code = useSelector(state => state.room.value.code);
     const status = useSelector(state => state.room.value.status);
+    const [particlesInit, setParticlesInit] = useState(false);
     const [showSettings, setShowSettings] = useState(false);
+    const [showParticles, setShowParticles] = useState(false);
     const [showChat, setShowChat] = useState(false);
     const [showControls, setShowControls] = useState(false);
     const [playMusic, setPlayMusic] = useState(true);
@@ -40,6 +44,10 @@ export default function Room() {
     }, [code]);
     useWebSocket("player_data", data => {
         dispatch(addPlayer(data.player));
+    })
+    useWebSocket("player_won", () => {
+        setShowParticles(true);
+        setTimeout(() => setShowParticles(false), 10000);
     })
     useWebSocket("player_left_room", data => {
         dispatch(removePlayer(data.player));
@@ -78,7 +86,7 @@ export default function Room() {
         startRound();
     })
 
-    const startRound = useCallback(() =>  {
+    const startRound = useCallback(() => {
         sendMessage("start_round", {});
     }, []);
 
@@ -101,13 +109,130 @@ export default function Room() {
         navigate("/join")
     });
 
+    const options = useMemo(() => ({
+        "particles": {
+            "number": {
+                "value": 100
+            },
+            "color": {
+                "value": [
+                    "#00FFFC",
+                    "#FC00FF",
+                    "#fffc00"
+                ]
+            },
+            "shape": {
+                "type": [
+                    "circle",
+                    "square"
+                ]
+            },
+            "opacity": {
+                "value": {
+                    "min": 0,
+                    "max": 1
+                },
+                "animation": {
+                    "enable": true,
+                    "speed": 2,
+                    "startValue": "max",
+                    "destroy": "min"
+                }
+            },
+            "size": {
+                "value": {
+                    "min": 2,
+                    "max": 4
+                }
+            },
+            "life": {
+                "duration": {
+                    "sync": true,
+                    "value": 30
+                },
+                "count": 1
+            },
+            "move": {
+                "enable": true,
+                "gravity": {
+                    "enable": true,
+                    "acceleration": 10
+                },
+                "speed": {
+                    "min": 10,
+                    "max": 20
+                },
+                "decay": 0.1,
+                "direction": "none",
+                "straight": false,
+                "outModes": {
+                    "default": "destroy",
+                    "top": "none"
+                }
+            },
+            "rotate": {
+                "value": {
+                    "min": 0,
+                    "max": 360
+                },
+                "direction": "random",
+                "move": true,
+                "animation": {
+                    "enable": true,
+                    "speed": 60
+                }
+            },
+            "tilt": {
+                "direction": "random",
+                "enable": true,
+                "move": true,
+                "value": {
+                    "min": 0,
+                    "max": 360
+                },
+                "animation": {
+                    "enable": true,
+                    "speed": 60
+                }
+            },
+            "roll": {
+                "darken": {
+                    "enable": true,
+                    "value": 25
+                },
+                "enable": true,
+                "speed": {
+                    "min": 15,
+                    "max": 25
+                }
+            },
+            "wobble": {
+                "distance": 30,
+                "enable": true,
+                "move": true,
+                "speed": {
+                    "min": -15,
+                    "max": 15
+                }
+            }
+        }
+    }))
+
+    useEffect(() => {
+        initParticlesEngine(async (engine) => {
+            await loadSlim(engine);
+        }).then(() => {
+            setParticlesInit(true);
+        });
+    }, []);
+
     return (
         <div className="room">
             <div className="open-controls-button-container">
                 <OpenControlsButton onToggle={toggleShowControls} />
             </div>
-            <div className={`room-controls ${showControls?"room-controls-visible":""}`}>
-                <button className="button icon-button play-music-button" 
+            <div className={`room-controls ${showControls ? "room-controls-visible" : ""}`}>
+                <button className="button icon-button play-music-button"
                     onClick={() => setPlayMusic(!playMusic)}>
                     <FontAwesomeIcon icon={playMusic ? faMusic : faVolumeMute} />
                 </button>
@@ -115,17 +240,23 @@ export default function Room() {
                 <div className="open-chat-button-container">
                     <OpenChatButton onToggle={toggleShowChat} />
                 </div>
-                <LeaveRoomButton onLeave={handleLeave}/>
+                <LeaveRoomButton onLeave={handleLeave} />
             </div>
-            <Music play={playMusic}/>
+            <Music play={playMusic} />
             <ChatOverlay showChat={showChat} />
-            {status=="LOBBY"?
+            {status == "LOBBY" ?
                 <>
                     <RoomOverview onToggleSettings={toggleShowSettings} onStart={startRound} />
-                    {showSettings&&<RoomSettings onClose={toggleShowSettings} />}
-                </>:
+                    {showSettings && <RoomSettings onClose={toggleShowSettings} />}
+                </> :
                 <Round />
             }
+            {showParticles && particlesInit && <div id="particles-container">
+                <Particles
+                    id="ts-particles"
+                    options={options}
+                />
+            </div>}
         </div>
     )
 }
