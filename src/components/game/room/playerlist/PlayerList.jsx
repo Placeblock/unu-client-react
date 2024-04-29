@@ -13,11 +13,12 @@ export default function PlayerList() {
         <div className="player-list">
             <h1 className="player-list-title">Players</h1>
             <div className="player-list-items-container">
-                {players.map((player,i) => (
+                {players.toSorted((p1, p2) => (leaderboard[p1.uuid]||0 - leaderboard[p2.uuid]||0)).map((player,i) => (
                     <PlayerListItem 
                         isOwner={player.uuid==owner} 
                         isUser={player.uuid==user} 
                         points={leaderboard[player.uuid]||0}
+                        index={i}
                         name={player.name} key={i}/>
                 ))}
             </div>
