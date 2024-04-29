@@ -2,13 +2,14 @@ import Card from "../../../card/Card"
 import "./OpponentInventory.css"
 import { calcRotation } from "../inventory/Inventory";
 import useWebSocket from "../../../websocket/WebSocketHook";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { getReaction } from "../quickreactions/ReactionItem";
 
 export default function OpponentInventory({playerUUID, playerName, amount, active}) {
     const [showAckLastCard, setShowAckLastCard] = useState(false);
     const [showReaction, setShowReaction] = useState(false);
     const [lastReaction, setLastReaction] = useState("");
+    const ref = useRef(null);
 
     function calcTranslation(i) {
         const betweencardsx = 5;
@@ -34,8 +35,15 @@ export default function OpponentInventory({playerUUID, playerName, amount, activ
             }, 7000);
         }
     })
+
+    useEffect(() => {
+        if (active && ref.current != null) {
+            ref.current.scrollIntoView({behaviour: "smooth"});
+        }
+    }, [active])
+
     return (
-        <div className={`opponent-inventory ${active?"active-opponent-inventory":""}`} tabIndex={0}>
+        <div ref={ref} className={`opponent-inventory ${active?"active-opponent-inventory":""}`} tabIndex={0}>
             <p className="opponent-inventory-player-name">{playerName}</p>
 
             <div className="opponent-inventory-large">
