@@ -6,8 +6,8 @@ export default function NameInput({onSubmit}) {
 
     function handleClick(e) {
         e.preventDefault();
-        if (name === "") return;
-        onSubmit(name);
+        if (name.trim() === "") return;
+        onSubmit(name.trim());
     }
 
     function handleChange(e) {

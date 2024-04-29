@@ -19,9 +19,23 @@ import { resetRound, setInventory, setRoundData } from "../../../store/roundSlic
 import { faMusic, faVolumeMute } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import AppTooltip from "../../tooltip/AppTooltip";
-import Music from "./music/Music";
 import Particles, { initParticlesEngine } from "@tsparticles/react";
 import { loadSlim } from "@tsparticles/slim";
+import audio from "../../../assets/music.mp3"
+
+const music = new Audio(audio);
+music.volume = 0.1;
+
+export function playMusic() {
+    if (music.paused) {
+        music.play()
+    }
+}
+
+function stopMusic() {
+    music.pause();
+    music.currentTime = 0;
+}
 
 export default function Room() {
     const { id } = useParams();
@@ -33,7 +47,7 @@ export default function Room() {
     const [showParticles, setShowParticles] = useState(false);
     const [showChat, setShowChat] = useState(false);
     const [showControls, setShowControls] = useState(false);
-    const [playMusic, setPlayMusic] = useState(true);
+    const [playingMusic, setPlayingMusic] = useState(true);
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
@@ -236,8 +250,16 @@ export default function Room() {
             </div>
             <div className={`room-controls ${showControls ? "room-controls-visible" : ""}`}>
                 <button className="button icon-button play-music-button"
-                    onClick={() => setPlayMusic(!playMusic)}>
-                    <FontAwesomeIcon icon={playMusic ? faMusic : faVolumeMute} />
+                    onClick={() => {
+                        if (music.paused) {
+                            setPlayingMusic(true);
+                            playMusic();
+                        } else {
+                            setPlayingMusic(false);
+                            stopMusic();
+                        }
+                    }}>
+                    <FontAwesomeIcon icon={playingMusic ? faMusic : faVolumeMute} />
                 </button>
                 <AppTooltip id="open-chat-button" content="Mute/Play Music" />
                 <div className="open-chat-button-container">
@@ -245,7 +267,6 @@ export default function Room() {
                 </div>
                 <LeaveRoomButton onLeave={handleLeave} />
             </div>
-            <Music play={playMusic} />
             <ChatOverlay showChat={showChat} />
             {status == "LOBBY" ?
                 <>

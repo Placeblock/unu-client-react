@@ -15,6 +15,7 @@ import { setPlayers } from "../../../store/roomSlice"
 import { setSettings } from "../../../store/roomSlice"
 import { setCardDeck } from "../../../store/cardDeckSlice"
 import { setRoundData } from "../../../store/roundSlice"
+import { playMusic } from "../../game/room/Room"
 
 
 const State = {
@@ -63,6 +64,7 @@ export default function Join() {
             setRoundData(dispatch, data.room_data.round);
         }
         navigate("/" + data.room_data.code);
+        playMusic()
     })
 
     return (
