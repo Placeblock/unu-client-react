@@ -58,7 +58,7 @@ export const roomSlice = createSlice({
       state.value.players.splice(i, 1);
     },
     removePlayers: (state) => {
-      state.values.players = [];
+      state.value.players = [];
     },
     setPlayers: (state, action) => {
       state.value.players = action.payload;

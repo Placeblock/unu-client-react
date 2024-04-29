@@ -11,9 +11,9 @@ export default function OpponentInventoryList() {
     
     return (
         <ul className="opponent-inventory-list">
-            {players.map((p, i) => (
+            {players.map((p) => (
                 <li className="oponent-inventory-container"
-                    key={i}>
+                    key={p}>
                     <OpponentInventory 
                         playerUUID={p}
                         playerName={findPlayer(roomPlayers, p)?.name}
