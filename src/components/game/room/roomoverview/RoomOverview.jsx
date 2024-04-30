@@ -35,7 +35,7 @@ export default memo(function RoomOverview({onToggleSettings, onStart}) {
             <div className="player-list-container room-overview-container dark-container">
                 <PlayerList />
             </div>
-            {players.length > 1 && owner===user && <div className="start-button-container">
+            {Object.keys(players).length > 1 && owner===user && <div className="start-button-container">
                 <button className="button positive-button start-button" onClick={onStart}>
                     <FontAwesomeIcon icon={faPlay} />
                 </button>

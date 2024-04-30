@@ -4,7 +4,7 @@ const initialState = {
   value: {
     "status":"LOBBY",
     "code":undefined,
-    "players": [],
+    "players": {},
     "settings": {
       start_card_amount: 7,
       no_last_card_ack_punishment: 2,
@@ -48,18 +48,17 @@ export const roomSlice = createSlice({
       state.value.settings[action.payload.key] = action.payload.value
     },
     addPlayer: (state, action) => {
-      state.value.players.push(action.payload);
+      state.value.players[action.payload.uuid] = action.payload;
     },
     setPlayerName: (state, action) => {
       const i = state.value.players.findIndex(player => player.uuid==action.payload.player);
       state.value.players[i].name = action.name;
     },
     removePlayer: (state, action) => {
-      const i = state.value.players.findIndex(player => player.uuid==action.payload);
-      state.value.players.splice(i, 1);
+      delete state.value.players[action.payload];
     },
     removePlayers: (state) => {
-      state.value.players = [];
+      state.value.players = {};
     },
     setPlayers: (state, action) => {
       state.value.players = action.payload;
@@ -86,10 +85,6 @@ export const roomSlice = createSlice({
     }
   }
 })
-
-export function findPlayer(players, uuid) {
-  return players.find(player => player.uuid==uuid);
-}
 
 export const { setCode, setState, setOwner, 
     setSetting, setSettings, addPlayer, setPlayerName, 

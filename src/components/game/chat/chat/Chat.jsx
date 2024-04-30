@@ -3,7 +3,6 @@ import MessageInput from "../messageinput/MessageInput";
 import MessageList from "../messagelist/MessageList";
 import "./Chat.css"
 import { useDispatch, useSelector } from "react-redux";
-import { findPlayer } from "../../../../store/roomSlice";
 import { addMessage, removeMessage } from "../../../../store/roomSlice";
 import { WebsocketContext } from "../../../websocket/WebSocketContext";
 import useWebSocket from "../../../websocket/WebSocketHook";
@@ -20,7 +19,7 @@ export default memo(function Chat({focus}) {
     }
     
     useWebSocket("message", (data) => {
-        const player = findPlayer(players, data.message.sender);
+        const player = players[data.message.sender];
         if (player == null) return;
         dispatch(addMessage({...data.message, playerName: player.name}));
     }, [players])
