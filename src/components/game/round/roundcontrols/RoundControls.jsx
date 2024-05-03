@@ -8,6 +8,7 @@ import { useDispatch } from "react-redux";
 import { sortInventory } from "../../../../store/roundSlice";
 import { faSmile } from "@fortawesome/free-regular-svg-icons";
 import ReactionMenu from "../quickreactions/ReactionMenu";
+import useKeyBind from "../../../../hooks/KeyBindHook";
 
 export default memo(function RoundControls() {
     const [showReactionMenu, setShowReactionMenu] = useState(false);
@@ -17,6 +18,9 @@ export default memo(function RoundControls() {
     function sort() {
         dispatch(sortInventory());
     }
+    useKeyBind("KeyS", () => {
+        ackLastCard();
+    })
 
     function endMove() {
         sendMessage("skip_move", {});
@@ -25,13 +29,16 @@ export default memo(function RoundControls() {
     function ackLastCard() {
         sendMessage("acknowledge_last_card", {});
     }
+    useKeyBind("KeyU", () => {
+        ackLastCard();
+    })
 
     return (
         <div className="round-controls">
             <button className="button open-reaction-menu-button" onClick={() => setShowReactionMenu(!showReactionMenu)}>
                 <FontAwesomeIcon icon={faSmile}/>
             </button>
-            <AppTooltip id="sort-button" content={"Sort Inventory"} />
+            <AppTooltip id="sort-button" content={"Sort Inventory (S)"} />
             <button className="button sort-button" onClick={sort}>
                 <FontAwesomeIcon icon={faArrowDownShortWide}/>
             </button>
@@ -43,7 +50,7 @@ export default memo(function RoundControls() {
             <button className="button ack-last-card-button" onClick={ackLastCard}>
                 <FontAwesomeIcon icon={faBullhorn}/>
             </button>
-            <AppTooltip id="ack-last-card-button" content={"Say UNU!"} />
+            <AppTooltip id="ack-last-card-button" content={"Say UNU! (U)"} />
             {showReactionMenu&&<div className="reaction-menu-container">
                 <ReactionMenu onClose={() => setShowReactionMenu(!showReactionMenu)}/>
             </div>}
