@@ -3,6 +3,7 @@ import { createSlice } from '@reduxjs/toolkit'
 const initialState = {
   value: {
     "status":"LOBBY",
+    "public":false,
     "code":undefined,
     "players": {},
     "settings": {
@@ -34,6 +35,9 @@ export const roomSlice = createSlice({
   reducers: {
     setCode: (state, action) => {
       state.value.code = action.payload
+    },
+    setPublic: (state, action) => {
+      state.value.public = action.payload
     },
     setState: (state, action) => {
       state.value.status = action.payload
@@ -90,6 +94,6 @@ export const { setCode, setState, setOwner,
     setSetting, setSettings, addPlayer, setPlayerName, 
     removePlayer, removePlayers, setPlayers, addMessage, 
     removeMessage, removeMessages, setMessages, setCardDeckPresets, 
-    resetRoom, setLeaderboard } = roomSlice.actions
+    resetRoom, setLeaderboard, setPublic } = roomSlice.actions
 
 export default roomSlice.reducer

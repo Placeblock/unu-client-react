@@ -1,4 +1,4 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import "./RoomSettings.css"
 import RoomSettingsSwitchItem from "./RoomSettingsSwitchItem";
 import { useCallback, useContext, useState } from "react";
@@ -8,12 +8,19 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import CardDeckEditor from "./carddeckedit/carddeckeditor/CardDeckEditor";
 import useKeyBind from "../../../hooks/KeyBindHook";
+import RoomSettingsItem from "./RoomSettingsItem";
+import useWebSocket from "../../websocket/WebSocketHook";
+import SwitchInput from "../../input/SwitchInput";
+import { setPublic } from "../../../store/roomSlice";
 
 export default function RoomSettings({onClose}) {
+    const dispatch = useDispatch();
     const settings = useSelector(state => state.room.value.settings);
     const {sendMessage} = useContext(WebsocketContext);
     const [showCardDeckEdit, setShowCardDeckEdit] = useState(false);
     const owner = useSelector(state => state.room.value.owner);
+    const roomCode = useSelector(state => state.room.value.code);
+    const publicRoom = useSelector(state => state.room.value.public);
     const user = useSelector(state => state.user.value.uuid);
 
     const disabled = owner!=user;
@@ -34,6 +41,15 @@ export default function RoomSettings({onClose}) {
         onClose();
     });
 
+    const handleVisibilityChange = useCallback((pub) => {
+        sendMessage("room_visibility", {"public_room": pub})
+    })
+    useWebSocket("room_visibility", data => {
+        if (data.room_info.code === roomCode) {
+            dispatch(setPublic(data.public_room))
+        }
+    })
+
     return (
         <div className="room-settings dark-container">
             <div className="room-settings-info">
@@ -44,6 +60,13 @@ export default function RoomSettings({onClose}) {
             </div>
             <div className="room-settings-contents">
                 <div className="room-settings-item-container">
+                    <p style={{color: "white"}}>Room</p>
+                    <RoomSettingsItem title={"Public"}>
+                        <SwitchInput 
+                            onSwitch={handleVisibilityChange} toggled={publicRoom}
+                            disabled={disabled} />
+                    </RoomSettingsItem>
+                    <p style={{color: "white"}}>Round</p>
                     <RoomSettingsCounterItem title={"Startcards"} name={"start_card_amount"} onUpdate={handleUpdate} disabled={disabled} min={1} max={50}/>
                     <RoomSettingsCounterItem title={"No ack. Punishment"} name={"no_last_card_ack_punishment"} onUpdate={handleUpdate} disabled={disabled} min={0} max={5}/>
                     <RoomSettingsCounterItem title={"False ack. Punishment"} name={"punishment_false_ack"} onUpdate={handleUpdate} disabled={disabled} min={0} max={5}/>

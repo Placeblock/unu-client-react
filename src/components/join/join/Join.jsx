@@ -1,7 +1,7 @@
 import { useNavigate, useParams } from "react-router-dom"
 import Logo from "../../logo/Logo"
 import "./Join.css"
-import { useContext, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { WebsocketContext } from "../../websocket/WebSocketContext"
 import { useDispatch } from "react-redux"
 import { setUserName } from "../../../store/userSlice"
@@ -15,7 +15,7 @@ import { setPlayers } from "../../../store/roomSlice"
 import { setSettings } from "../../../store/roomSlice"
 import { setCardDeck } from "../../../store/cardDeckSlice"
 import { setRoundData } from "../../../store/roundSlice"
-import { playMusic } from "../../game/room/Room"
+import { playMusic, stopMusic } from "../../game/room/Room"
 
 
 const State = {
@@ -73,6 +73,10 @@ export default function Join() {
         navigate("/" + data.room_data.code);
         playMusic()
     })
+
+    useEffect(() => {
+        stopMusic()
+    }, [])
 
     return (
         <div className="join">

@@ -32,7 +32,7 @@ export function playMusic() {
     }
 }
 
-function stopMusic() {
+export function stopMusic() {
     music.pause();
     music.currentTime = 0;
 }
