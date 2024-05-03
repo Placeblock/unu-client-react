@@ -49,7 +49,7 @@ export default function RoomSettings({onClose}) {
                     <RoomSettingsCounterItem title={"False ack. Punishment"} name={"punishment_false_ack"} onUpdate={handleUpdate} disabled={disabled} min={0} max={5}/>
                     <p style={{color: "white"}}>Cards</p>
                     <RoomSettingsSwitchItem title={"4+ on 4+"} name={"plus4_on_plus4"} onUpdate={handleUpdate} disabled={disabled}/>
-                    <RoomSettingsSwitchItem title={"2+ on 4+"} name={"plus2_on_plus4"} onUpdate={handleUpdate} disabled={disabled}/>
+                    <RoomSettingsSwitchItem title={"2+ on 4+ if color matches"} name={"plus2_on_plus4"} onUpdate={handleUpdate} disabled={disabled}/>
                     <RoomSettingsSwitchItem title={"4+ on 2+"} name={"plus4_on_plus2"} onUpdate={handleUpdate} disabled={disabled}/>
                     <RoomSettingsSwitchItem title={"Wish on 4+"} name={"wish_on_plus4"} onUpdate={handleUpdate} disabled={disabled}/>
                     <RoomSettingsSwitchItem title={"4+ on Wish"} name={"plus4_on_wish"} onUpdate={handleUpdate} disabled={disabled}/>
