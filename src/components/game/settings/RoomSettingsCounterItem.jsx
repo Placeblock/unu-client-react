@@ -4,7 +4,7 @@ import "./RoomSettingsCounterItem.css"
 import RoomSettingsItem from "./RoomSettingsItem"
 
 
-export default function RoomSettingsCounterItem({title, name, onUpdate, disabled, min, max}) {
+export default function RoomSettingsCounterItem({title, description, name, onUpdate, disabled, min, max}) {
     const setting = useSelector(state => state.room.value.settings[name]);
 
     return (

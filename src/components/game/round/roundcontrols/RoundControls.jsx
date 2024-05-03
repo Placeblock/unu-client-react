@@ -38,11 +38,10 @@ export default memo(function RoundControls() {
             <button className="button open-reaction-menu-button" onClick={() => setShowReactionMenu(!showReactionMenu)}>
                 <FontAwesomeIcon icon={faSmile}/>
             </button>
-            <AppTooltip id="sort-button" content={"Sort Inventory (S)"} />
             <button className="button sort-button" onClick={sort}>
                 <FontAwesomeIcon icon={faArrowDownShortWide}/>
             </button>
-            <AppTooltip id="sort-button" content={"Sort Inventory"} />
+            <AppTooltip id="sort-button" content={"Sort Inventory (S)"} />
             <button className="button skip-button" onClick={endMove}>
                 <FontAwesomeIcon icon={faCheck}/>
             </button>

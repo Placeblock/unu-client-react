@@ -47,17 +47,20 @@ export default function RoomSettings({onClose}) {
                     <RoomSettingsCounterItem title={"Startcards"} name={"start_card_amount"} onUpdate={handleUpdate} disabled={disabled} min={1} max={50}/>
                     <RoomSettingsCounterItem title={"Punishment"} name={"no_last_card_ack_punishment"} onUpdate={handleUpdate} disabled={disabled} min={0} max={5}/>
                     <RoomSettingsCounterItem title={"False ack. punishment"} name={"punishment_false_ack"} onUpdate={handleUpdate} disabled={disabled} min={0} max={5}/>
+                    <p style={{color: "white"}}>Cards</p>
                     <RoomSettingsSwitchItem title={"4+ on 4+"} name={"plus4_on_plus4"} onUpdate={handleUpdate} disabled={disabled}/>
                     <RoomSettingsSwitchItem title={"2+ on 4+"} name={"plus2_on_plus4"} onUpdate={handleUpdate} disabled={disabled}/>
                     <RoomSettingsSwitchItem title={"4+ on 2+"} name={"plus4_on_plus2"} onUpdate={handleUpdate} disabled={disabled}/>
                     <RoomSettingsSwitchItem title={"Wish on 4+"} name={"wish_on_plus4"} onUpdate={handleUpdate} disabled={disabled}/>
                     <RoomSettingsSwitchItem title={"4+ on Wish"} name={"plus4_on_wish"} onUpdate={handleUpdate} disabled={disabled}/>
                     <RoomSettingsSwitchItem title={"Wish on Wish"} name={"wish_on_wish"} onUpdate={handleUpdate} disabled={disabled}/>
+                    <p style={{color: "white"}}>Miscellaneous</p>
                     <RoomSettingsSwitchItem title={"Inverse play again"} name={"skip_on_inverse2_players"} onUpdate={handleUpdate} disabled={disabled}/>
                     <RoomSettingsSwitchItem title={"Auto next no Choice"} name={"auto_next_no_choice"} onUpdate={handleUpdate} disabled={disabled}/>
                     <RoomSettingsSwitchItem title={"Clear draw Stack on leave"} name={"clear_draw_stack_on_leave"} onUpdate={handleUpdate} disabled={disabled}/>
+                    <p style={{color: "white"}}>Deck</p>
                     <div className="open-card-deck-button-container">
-                        <button className="button open-card-deck-button" onClick={toggleCardDeckEdit}>Edit Card-Stack</button>
+                        <button className="button open-card-deck-button" onClick={toggleCardDeckEdit}>Edit Card-Deck</button>
                     </div>
                 </div>
             </div>
