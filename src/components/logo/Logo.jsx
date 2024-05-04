@@ -13,7 +13,7 @@ export default memo(function Logo() {
                     <Card card={{type:"draw_2", color:"BLUE"}}/>
                 </div>
                 <div className="logo-card-container" style={{"rotate":"20deg"}}>
-                    <Card card={{type:"wish", force_color:"RED", number:3}}/>
+                    <Card card={{type:"number", color:"RED", number:3}}/>
                 </div>
             </div>
             <h1>UNU!</h1>
