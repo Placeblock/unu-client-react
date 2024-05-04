@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import './App.css'
 import { State, WebsocketContext } from './components/websocket/WebSocketContext';
 import { Navigate, RouterProvider, createBrowserRouter } from 'react-router-dom';
@@ -28,6 +28,7 @@ const router = createBrowserRouter([
 function App() {
   const {status} = useContext(WebsocketContext);
   const dispatch = useDispatch();
+  const { sendMessage } = useContext(WebsocketContext);
 
   useWebSocket("own_player_data", (data) => {
     dispatch(setUserUUID(data.player.uuid))
@@ -37,6 +38,14 @@ function App() {
     console.log(data.presets);
     dispatch(setCardDeckPresets(data.presets));
   })
+  useEffect(() => {
+    const timer = setInterval(() => {
+      sendMessage("ping", {})
+    }, 20000)
+    return () => {
+      clearInterval(timer)
+    }
+  }, [])
 
   return (
     <div id="app">

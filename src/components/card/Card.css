@@ -47,3 +47,34 @@
     right: 0px;
     rotate: 180deg;
 }
+
+#wish-text {
+    width: 30px;
+    height: 30px;
+    display: flex;
+    flex-wrap: wrap;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+#wish-text span {
+    display: block;
+    width: 50%;
+    height: 50%;
+}
+
+#wish-text span:nth-child(1) {
+    background-color: var(--card-red);
+}
+
+#wish-text span:nth-child(2) {
+    background-color: var(--card-blue);
+}
+
+#wish-text span:nth-child(3) {
+    background-color: var(--card-yellow);
+}
+
+#wish-text span:nth-child(4) {
+    background-color: var(--card-green);
+}

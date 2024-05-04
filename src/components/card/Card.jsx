@@ -21,16 +21,21 @@ export default function Card({back=false, card={}}) {
             text = <FontAwesomeIcon icon={faBan} />;
             break;
         case "wish":
-            text = <span>?</span>;
+            text = <div id="wish-text">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>;
             break;
     }
     return (
         <div className="card" style={{"borderColor":getHex(card.force_color, "#ffffff")}}>
             {!back && 
             <div className="front" style={{"backgroundColor":getHex(card.color, "#000000")}}>
-                <p className="top">{text}</p>
-                <p>{text}</p>
-                <p className="bottom">{text}</p>
+                <div className="top">{text}</div>
+                <div>{text}</div>
+                <div className="bottom">{text}</div>
             </div>}
             {back && 
             <div className="back">
