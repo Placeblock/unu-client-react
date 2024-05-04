@@ -33,6 +33,7 @@ export default function PublicRooms({onJoin}) {
                     <span>{room.players} {room.players > 1 ? "Players":"Player"}</span>
                 </div>
             ))}
+            {publicRooms.length === 0 && <p style={{textAlign: "center", color: "white"}}>No rooms</p>}
         </div>
     )
 }
