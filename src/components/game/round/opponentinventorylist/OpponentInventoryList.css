@@ -13,6 +13,6 @@
 @media only screen and (min-width: 769px) {
     .opponent-inventory-list {
         gap: 100px;
-        padding-inline: 70px;
+        padding-inline: 100px;
     }
 }
