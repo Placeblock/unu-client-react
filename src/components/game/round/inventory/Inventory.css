@@ -1,11 +1,34 @@
 .inventory {
-    width: 130px;
+    width: 100vw;
+    display: flex;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding-inline: 150px;
+}
+
+.inventory-card-container:first-child {
+    margin-left: auto;
+}
+
+.inventory-card-container:last-child {
+    margin-right: auto;
+}
+
+.inventory-card-container {
+    position: relative;
+    width: 40px;
+    height: 260px;
+    display: inline-block;
+    flex-shrink: 0;
+    pointer-events: none;
 }
 
 .inventory-card {
     background-color: transparent;
     border: none;
     position: absolute;
+    left: 50%;
+    top: 60px;
     transform-origin: bottom center;
     transition: transform .5s ease-in-out, left .5s ease-in-out, top .5s ease-in-out;
 }
@@ -17,6 +40,10 @@
 .inventory-card:focus .card, .inventory-card:hover .card {
     transform: translateY(-50px) scale(1.05);
     cursor: pointer;
+}
+
+.inventory:not(.inventory-disabled) .inventory-card {
+    pointer-events: auto;
 }
 
 .inventory-disabled {

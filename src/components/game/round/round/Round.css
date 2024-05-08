@@ -9,8 +9,7 @@
 
 .inventory-container {
     position: fixed;
-    height: 200px;
-    bottom: 20px;
+    bottom: 0px;
     left: 50%;
     transform: translateX(-50%);
 }
