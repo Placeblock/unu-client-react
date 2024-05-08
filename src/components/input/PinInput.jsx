@@ -18,7 +18,7 @@ export default function PinInput({length, onSubmit=()=>{}}) {
         if (values.current[i] == undefined) return;
         result = result + values.current[i]
       }
-      onSubmit(Number(result));
+      onSubmit(result);
     }
   
     function onBack(index) {

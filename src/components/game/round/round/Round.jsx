@@ -55,6 +55,9 @@ export default function Round() {
     const handleDraw = useCallback(() => {
       sendMessage("draw_card", {});
     }, []);
+    const handleDrawDrawStack = useCallback(() => {
+      sendMessage("draw_draw_stack", {});
+    }, []);
 
     return (
       <div className="round">
@@ -62,7 +65,7 @@ export default function Round() {
           <OpponentInventoryList />
         </div>
         <CurrentCard />
-        <Pile onDraw={handleDraw}/>
+        <Pile onDraw={handleDraw} onDrawDrawStack={handleDrawDrawStack}/>
         {showColorPicker&&<div className="color-picker-container">
           <ColorPicker />
         </div>}

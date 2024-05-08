@@ -4,10 +4,11 @@ import { useState } from "react";
 import { useSelector } from "react-redux";
 
 
-export default function Pile({onDraw}) {
+export default function Pile({onDraw, onDrawDrawStack}) {
     const [transformations, setTransformations] = useState(() => getPileCards())
     const currentPlayer = useSelector(state => state.round.value.currentPlayer);
     const user = useSelector(state => state.user.value.uuid);
+    const drawStack = useSelector(state => state.round.value.drawStack);
 
     function handleDraw() {
         if (currentPlayer!=user) return;
@@ -19,20 +20,26 @@ export default function Pile({onDraw}) {
 
     return (
         <div className="pile">
-            {transformations.map((t, i) => (
-                (i+1!==transformations.length) ? 
-                <div className="pile-card" 
-                    key={i}
-                    style={{transform: getTransform(t), opacity: i*5 + "%"}}>
-                    <Card card={{}} back={true}/>
-                </div> : 
-                <button className="pile-card pile-card-clickable" 
-                    onClick={handleDraw}
-                    key={i}
-                    style={{transform: getTransform(t)}}>
-                    <Card card={{}} back={true}/>
-                </button>
-            ))}
+            <div className="pile-cards">
+                {transformations.map((t, i) => (
+                    (i+1!==transformations.length) ? 
+                    <div className="pile-card" 
+                        key={i}
+                        style={{transform: getTransform(t), opacity: i*5 + "%"}}>
+                        <Card card={{}} back={true}/>
+                    </div> : 
+                    <button className="pile-card pile-card-clickable" 
+                        onClick={handleDraw}
+                        key={i}
+                        style={{transform: getTransform(t)}}>
+                        <Card card={{}} back={true}/>
+                    </button>
+                ))}
+            </div> 
+            {drawStack!=0&&currentPlayer===user&&<div className="draw-draw-stack">
+                <button className="button basic-button"
+                    onClick={onDrawDrawStack}>Take {drawStack} Card{drawStack>1&&"s"}</button>
+            </div>}
         </div>
     )
 }

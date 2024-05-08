@@ -10,6 +10,7 @@ export default function CurrentCard() {
         <div className="current-card">
             <Card card={card}/>
             {drawStack!=0&&<span className="draw-stack-badge">{drawStack}</span>}
+
         </div>
     )
 }
