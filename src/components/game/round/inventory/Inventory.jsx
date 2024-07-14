@@ -1,7 +1,7 @@
 import "./Inventory.css"
 
 import Card from "../../../card/Card";
-import { useContext } from "react";
+import { useContext, useEffect, useRef } from "react";
 import { WebsocketContext } from "../../../websocket/WebSocketContext";
 import { useSelector } from "react-redux";
 
@@ -11,13 +11,21 @@ export default function Inventory() {
     const user = useSelector(state => state.user.value.uuid);
     const {sendMessage} = useContext(WebsocketContext);
     const amount = cards.length;
+    const invRef = useRef();
 
     function handlePlace(uuid) {
         sendMessage("place_card", {"uuid":uuid});
     }
 
+    useEffect(() => {
+        if (invRef != null) {
+            // Center inventory at beginning
+            invRef.current.scrollTo(invRef.current.scrollWidth/2-window.innerWidth/2, 0);
+        }
+    }, [invRef]);
+
     return (
-        <div className={`inventory ${currentPlayer!=user?"inventory-disabled":""}`}>
+        <div ref={invRef} className={`inventory ${currentPlayer!=user?"inventory-disabled":""}`}>
             {cards.map((c, i) => (
                 <div className="inventory-card-container">
                     <button className="inventory-card" 
