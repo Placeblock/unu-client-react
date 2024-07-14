@@ -22,6 +22,7 @@ import AppTooltip from "../../tooltip/AppTooltip";
 import Particles, { initParticlesEngine } from "@tsparticles/react";
 import { loadSlim } from "@tsparticles/slim";
 import audio from "../../../assets/music.mp3"
+import * as particleConfig from "./particleConfig.json"
 
 const music = new Audio(audio);
 music.volume = 0.1;
@@ -126,119 +127,11 @@ export default function Room() {
         navigate("/join")
     });
 
-    const options = useMemo(() => ({
-        "particles": {
-            "number": {
-                "value": 100
-            },
-            "color": {
-                "value": [
-                    "#00FFFC",
-                    "#FC00FF",
-                    "#fffc00"
-                ]
-            },
-            "shape": {
-                "type": [
-                    "circle",
-                    "square"
-                ]
-            },
-            "opacity": {
-                "value": {
-                    "min": 0,
-                    "max": 1
-                },
-                "animation": {
-                    "enable": true,
-                    "speed": 2,
-                    "startValue": "max",
-                    "destroy": "min"
-                }
-            },
-            "size": {
-                "value": {
-                    "min": 2,
-                    "max": 4
-                }
-            },
-            "life": {
-                "duration": {
-                    "sync": true,
-                    "value": 30
-                },
-                "count": 1
-            },
-            "move": {
-                "enable": true,
-                "gravity": {
-                    "enable": true,
-                    "acceleration": 10
-                },
-                "speed": {
-                    "min": 10,
-                    "max": 20
-                },
-                "decay": 0.1,
-                "direction": "none",
-                "straight": false,
-                "outModes": {
-                    "default": "destroy",
-                    "top": "none"
-                }
-            },
-            "rotate": {
-                "value": {
-                    "min": 0,
-                    "max": 360
-                },
-                "direction": "random",
-                "move": true,
-                "animation": {
-                    "enable": true,
-                    "speed": 60
-                }
-            },
-            "tilt": {
-                "direction": "random",
-                "enable": true,
-                "move": true,
-                "value": {
-                    "min": 0,
-                    "max": 360
-                },
-                "animation": {
-                    "enable": true,
-                    "speed": 60
-                }
-            },
-            "roll": {
-                "darken": {
-                    "enable": true,
-                    "value": 25
-                },
-                "enable": true,
-                "speed": {
-                    "min": 15,
-                    "max": 25
-                }
-            },
-            "wobble": {
-                "distance": 30,
-                "enable": true,
-                "move": true,
-                "speed": {
-                    "min": -15,
-                    "max": 15
-                }
-            }
-        }
-    }))
-
     useEffect(() => {
         initParticlesEngine(async (engine) => {
             await loadSlim(engine);
         }).then(() => {
+            console.log("LOADED PARTICLES");
             setParticlesInit(true);
         });
     }, []);
@@ -275,12 +168,9 @@ export default function Room() {
                 </> :
                 <Round />
             }
-            {showParticles && particlesInit && <div id="particles-container">
-                <Particles
-                    id="ts-particles"
-                    options={options}
-                />
-            </div>}
+            {particlesInit && showParticles && <Particles
+                    options={particleConfig}
+            />}
         </div>
     )
 }

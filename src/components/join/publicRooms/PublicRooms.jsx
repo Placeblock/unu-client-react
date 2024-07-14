@@ -27,8 +27,8 @@ export default function PublicRooms({onJoin}) {
 
     return (
         <div className="public-rooms">
-            {publicRooms.map((room) => (
-                <div className="public-room" onClick={() => onJoin(room.code)}>
+            {publicRooms.map((room, i) => (
+                <div key={i} className="public-room" onClick={() => onJoin(room.code)}>
                     <p>{room.owner_name} </p>
                     <span>{room.players} {room.players > 1 ? "Players":"Player"}</span>
                 </div>
