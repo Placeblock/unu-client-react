@@ -9,7 +9,7 @@
 .open-controls-button-container {
     position: fixed;
     right: 10px;
-    bottom: 10px;
+    top: 10px;
     z-index: 2;
 }
 
@@ -17,7 +17,7 @@
     z-index: 2;
     position: fixed;
     right: 80px;
-    bottom: 10px;
+    top: 10px;
     transform: translateX(200%);
     transition: transform 0.2s ease-in-out;
     border-radius: 10px;
@@ -32,6 +32,7 @@
 @media only screen and (min-width: 769px) {
     .room-controls {
         right: 10px;
+        bottom: 10px;
         transform: translateX(0px);
     }
     .open-controls-button-container {
