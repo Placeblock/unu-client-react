@@ -1,10 +1,13 @@
+.name-input {
+    max-width: 95%;
+}
+
 .name-input form {
     display: inline-flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     gap: 30px;
-    max-width: 95%;
 }
 
 .name-input label{
